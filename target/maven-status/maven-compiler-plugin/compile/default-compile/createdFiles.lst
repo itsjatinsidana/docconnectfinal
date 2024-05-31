@@ -1,0 +1,9 @@
+com\DocConnect\docCONNECT\allControllers\AdminRestController.class
+com\DocConnect\docCONNECT\allControllers\UserController.class
+com\DocConnect\docCONNECT\vmm\RDBMS_TO_JSON.class
+com\DocConnect\docCONNECT\allControllers\UserRestController.class
+com\DocConnect\docCONNECT\allControllers\DoctorRestController.class
+com\DocConnect\docCONNECT\allControllers\DoctorController.class
+com\DocConnect\docCONNECT\allControllers\AdminController.class
+com\DocConnect\docCONNECT\DocConnectApplication.class
+com\DocConnect\docCONNECT\vmm\DBLoader.class

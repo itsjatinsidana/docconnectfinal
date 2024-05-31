@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>DocCOnnect</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+        <meta name="robots" content="" />    
+        <meta name="description" content="" />
+
+        <!-- FAVICONS ICON -->
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+
+        <!-- PAGE TITLE HERE -->
+        <title>Mfine Template | Customer Appointments</title>
+
+        <!-- MOBILE SPECIFIC -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+
+        <!-- BOOTSTRAP STYLE SHEET -->
+        <link  href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- FONTAWESOME STYLE SHEET -->
+        <link  href="css/font-awesome.min.css" rel="stylesheet">
+        <!-- Feather STYLE SHEET -->
+        <link href="css/feather.css" rel="stylesheet">
+
+        <!-- Font STYLE SHEET -->
+        <link href="css/font.css" rel="stylesheet">    
+        <!-- OWL CAROUSEL STYLE SHEET -->
+        <link href="css/owl.carousel.min.css" rel="stylesheet">
+        <!-- SLICK CAROUSEL STYLE SHEET -->
+        <link href="css/slick.min.css" rel="stylesheet">
+        <!-- SLICK STYLE SHEET -->
+        <link href="css/slick-theme.css" rel="stylesheet">
+        <!-- Custome scrollbar STYLE SHEET  -->
+        <link href="css/jquery.scrollbar.css" rel="stylesheet">  
+        <!-- DropZone STYLE SHEET  --> 
+        <link href="css/dropzone.css" rel="stylesheet">       
+        <!-- MAGNIFIC POPUP STYLE SHEET -->
+        <link href="css/magnific-popup.min.css" rel="stylesheet">
+        <!-- FLATICON STYLE SHEET -->
+        <link href="css/flaticon.min.css" rel="stylesheet">
+        <!-- Lc light box popup -->
+        <link href="css/lc_lightbox.css" rel="stylesheet">     
+        <!-- Price Range Slider -->
+        <link href="css/bootstrap-slider.min.css" rel="stylesheet">
+        <!-- Bootstrap-toggle -->
+        <link href="css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <!-- Bootstrap-datatables -->
+        <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <!-- Date-picker -->
+        <link href="css/date-picker.css" rel="stylesheet">
+        <!-- Full calendar -->
+        <link href="css/fullcalendar.min.css" rel="stylesheet">   
+        <!-- MAIN STYLE SHEET -->
+        <link href="css/style.css" rel="stylesheet">   
+
+        <style>
+            .card {
+                box-shadow: 0 10px 8px 0 rgba(0,0,0,0.2);
+                transition: 0.3s;
+                margin-bottom: 20px;
+            }
+
+            .card:hover {
+                box-shadow: #04414d 10px 8px 16px 0 ;
+            }
+        </style>
+        <script>
+            function addDoctorPhoto() {
+                {
+
+                    var file = document.getElementById("photo").files[0];
+
+
+                    var formdata = new FormData();
+
+                    formdata.append("file", file);
+                    var url = "./adddoctorphoto";
+
+                    fetch(url, {method: "POST", body: formdata})
+                            .then(response => response.text())
+                            .then(ans => renderAsHtml(ans));
+                }
+
+                function renderAsHtml(ans)
+                {
+
+
+
+                    if (ans === "success")
+                    {
+                        alert("photo added succsessfully ")
+
+                        window.location.href = "/adddoctorphotos";
+
+
+                    } else
+                    {
+                        alert(ans);
+                    }
+
+
+                }
+            }
+
+            function showPhotos() {
+                {
+                    // ajax fetch api code 
+
+                    //servelet page
+                    var url = "/getdoctorphotos";
+
+                    fetch(url)
+                            .then(response => response.text())
+                            .then(ans => renderAsHtml1(ans));
+                }
+
+                function renderAsHtml1(ans)
+                {
+
+
+                    //step 2
+                    //parsing of json
+                    var mainobj = JSON.parse(ans);
+                    var arr = mainobj["ans"];
+
+                    console.log(arr);
+
+
+                    //step3
+                    var s = "";
+                    // we can fetch data in json array using for loop
+                    for (var i = 0; i < arr.length; i++)
+                    {
+
+                        var st = arr[i];
+
+                        s = s + "<div class = \"col-lg-4  \">";
+
+                        s = s + "<div class = \"card\" style=\"width:400px\">";
+                        s = s + "<img class=\"card-img-top\" src=\"/myuploads/" + st.photo + "\" alt=\"Card image\" style=\"width: 400px; height: 400px;\">";
+
+                        s = s + "<div class=\"card-body d-flex justify-content-center\">"
+                        s = s + "<button type=\"button\" class=\"btn btn-danger \" onclick=\"deletePhoto('" + st.photo_id + "')\">Delete</button>"
+                        s = s + "</div>"
+
+
+                        s = s + " </div>"
+                        s = s + " </div>"
+                    }
+
+
+
+                    document.getElementById("d1").innerHTML = s;
+                 }
+
+            }
+
+            function deletePhoto(photo_id) {
+                alert(photo_id);
+                {
+
+                    var url = "/deletedoctorphoto?photo_id=" + photo_id;
+
+                    fetch(url, {method: "GET"})
+                            .then(response => response.text())
+                            .then(ans => renderAsHtml2(ans));
+                }
+
+                function renderAsHtml2(ans)
+                {
+
+
+
+                    if (ans === "success")
+                    {
+                        alert("photo deleted succsessfully ")
+                        showPhotos();
+
+                    } else if (ans === "fail")
+                    {
+                        alert("Photo didn't deleted")
+                    } else if (ans === "exception")
+                    {
+                        alert(ans);
+                    }
+
+                }
+            }
+        </script>
+    </head>
+    <body onload="showPhotos()">
+
+<!--        <div th:replace="Navbar:: header"></div>-->
+     <div th:replace="DoctorNavbar:: doctorheader"></div>
+
+        <div class="page-content">
+            <!--Banner-->
+            <div class="aon-page-benner-area">
+                <div class="aon-page-banner-row">
+                    <div class="aon-page-benner-overlay" ></div>
+                    <div class="sf-banner-heading-wrap">
+                        <div class="sf-banner-heading-area">
+                            <div class="sf-banner-heading-large">Doctor Add Photos</div>
+                            <div class="sf-banner-breadcrumbs-nav">
+                                <ul class="list-inline">
+                                    <li><a href="/doctordashboard">Doctor Home </a></li>
+                                    <li><a href="https://aonetheme.com/latest-service-finder/providers-category/packers-and-movers/">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+
+            <div class="section-full p-t80 p-b90 sf-contact-form3-area">
+                <div class="container">
+
+                    <div class="sf-contact-form3-wrap">
+                        <div class="sf-con-form-title text-center">
+                            <h2 class="m-b30">Upload Photos</span></h2>
+                        </div>
+                        <!--Contact Information-->  
+
+                        <!--Contact Information End-->
+                    </div>  
+
+                </div>
+                <div class="sf-uplaod-files-wrap container">
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div action="" class="dropzone dropzone-custom m-b30"> 
+                                    <div class="dz-message">    
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="file" name="f1" placeholder="Photo" id="photo" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+
+
+                            <div class="sf-contact-submit-btn text-center">
+                                <button class="site-button" type="button" onclick="addDoctorPhoto()">Add Photos</button>
+                            </div>
+
+
+
+
+
+                        </div>
+
+
+                    </form>
+                </div>
+
+
+            </div>
+
+
+            <div class="container">
+
+                <div class="row" id="d1" >
+
+
+                </div>
+            </div>
+
+            <br/><!-- comment -->
+
+            <!--            <img class="card-img-top" src="src/main/resources/static/myuploads/sp.jpeg" alt="Card image">
+            -->
+
+
+
+
+            <div th:replace="Footer:: footer"></div>
+            <script  src="js/jquery-3.6.0.min.js"></script><!-- JQUERY.MIN JS -->
+            <script  src="js/popper.min.js"></script><!-- POPPER.MIN JS -->
+            <script  src="js/bootstrap.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+
+            <script  src="js/jquery.bootstrap-touchspin.js"></script><!-- FORM JS -->
+            <script  src="js/bootstrap-slider.min.js"></script><!-- BOOTSTRAP Slider --> 
+            <script  src="js/magnific-popup.min.js"></script><!-- MAGNIFIC-POPUP JS -->
+            <script  src="js/waypoints.min.js"></script><!-- WAYPOINTS JS -->
+            <script  src="js/counterup.min.js"></script><!-- COUNTERUP JS -->
+            <script  src="js/waypoints-sticky.min.js"></script><!-- STICKY HEADER -->
+            <script  src="js/isotope.pkgd.min.js"></script><!-- MASONRY  -->
+            <script  src="js/owl.carousel.min.js"></script><!-- OWL  SLIDER  -->
+            <script  src="js/slick.min.js"></script><!-- Slick SLIDER  -->
+            <script  src="js/theia-sticky-sidebar.js"></script><!-- STICKY SIDEBAR  -->
+            <script  src="js/jquery.scrollbar.min.js"></script><!-- MY ACCOUNT LEFT PANEL SCROLLER -->
+            <script  src="js/dropzone.js"></script><!--IMAGE UPLOAD-->  
+            <script  src="js/bootstrap4-toggle.min.js"></script><!-- BOOTSTRAP TOOGLE-->
+            <script  src="js/jquery.dataTables.min.js"></script><!--DATA TABLE-->
+            <script  src="js/dataTables.bootstrap4.min.js"></script><!-- DATA TABLE-->
+            <script  src="js/lc_lightbox.lite.js" ></script><!-- IMAGE POPUP -->
+            <script  src="js/datepicker.min.js"></script><!-- DATEPICKER -->
+            <script  src="js/fullcalendar.min.js"></script><!-- DATEPICKER -->
+            <script src="js/recaptcha-api.js"></script><!-- RECAPTCHA-->
+            <script  src="js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
+
+    </body>
+</html>

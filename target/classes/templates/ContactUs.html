@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>DocConnect</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+        <meta name="robots" content="" />    
+        <meta name="description" content="" />
+
+        <!-- FAVICONS ICON -->
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+
+        <!-- PAGE TITLE HERE -->
+        <title>DocConnect</title>
+
+        <!-- MOBILE SPECIFIC -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+
+        <!-- BOOTSTRAP STYLE SHEET -->
+        <link  href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- FONTAWESOME STYLE SHEET -->
+        <link  href="css/font-awesome.min.css" rel="stylesheet">
+        <!-- Feather STYLE SHEET -->
+        <link href="css/feather.css" rel="stylesheet">
+
+        <!-- Font STYLE SHEET -->
+        <link href="css/font.css" rel="stylesheet">    
+        <!-- OWL CAROUSEL STYLE SHEET -->
+        <link href="css/owl.carousel.min.css" rel="stylesheet">
+        <!-- SLICK CAROUSEL STYLE SHEET -->
+        <link href="css/slick.min.css" rel="stylesheet">
+        <!-- SLICK STYLE SHEET -->
+        <link href="css/slick-theme.css" rel="stylesheet">
+        <!-- Custome scrollbar STYLE SHEET  -->
+        <link href="css/jquery.scrollbar.css" rel="stylesheet">  
+        <!-- DropZone STYLE SHEET  --> 
+        <link href="css/dropzone.css" rel="stylesheet">       
+        <!-- MAGNIFIC POPUP STYLE SHEET -->
+        <link href="css/magnific-popup.min.css" rel="stylesheet">
+        <!-- FLATICON STYLE SHEET -->
+        <link href="css/flaticon.min.css" rel="stylesheet">
+        <!-- Lc light box popup -->
+        <link href="css/lc_lightbox.css" rel="stylesheet">     
+        <!-- Price Range Slider -->
+        <link href="css/bootstrap-slider.min.css" rel="stylesheet">
+        <!-- Bootstrap-toggle -->
+        <link href="css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <!-- Bootstrap-datatables -->
+        <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <!-- Date-picker -->
+        <link href="css/date-picker.css" rel="stylesheet">
+        <!-- Full calendar -->
+        <link href="css/fullcalendar.min.css" rel="stylesheet">   
+        <!-- MAIN STYLE SHEET -->
+        <link href="css/style.css" rel="stylesheet">   
+
+        <!-- SWEETALERT LIBRARY -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    
+
+
+
+    </head>
+
+    <body>
+
+        <div class="loading-area">
+            <div class="loading-box"></div>
+            <div class="loading-pic">
+                <div class="cssload-wrap">
+                    <div class="cssload-container">
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-wraper cus-account-wrap  ">
+            <header class="site-header header-style-1 mobile-sider-drawer-menu header-full-width  ">
+                <div class="sticky-header main-bar-wraper  navbar-expand-lg ">
+                    <div class="main-bar bg-dark-green">  
+
+                        <div class="container clearfix"> 
+                            <!--Logo section start-->
+                            <div class="logo-header">
+                                <div class="logo-header-inner logo-header-one">
+                                    <a href="/">
+                                        <img class="logo-pic-one" src="images/doclogo.jpg" alt="">
+                                        <img class="logo-pic-two" src="images/doclogo2.jpg" alt="">
+                                    </a>
+                                </div>
+                            </div>  
+                            <!--Logo section End-->
+
+                            <!-- NAV Toggle Button -->
+                            <button id="mobile-side-drawer" data-target=".header-nav" data-toggle="collapse" type="button" class="navbar-toggler collapsed">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar icon-bar-first"></span>
+                                <span class="icon-bar icon-bar-two"></span>
+                                <span class="icon-bar icon-bar-three"></span>
+                            </button> 
+
+                            <!-- MAIN Vav -->
+                            <div class="nav-animation header-nav navbar-collapse collapse d-flex justify-content-center" id="sessionnav">
+
+                                <ul class=" nav navbar-nav">
+                                    <li class="has-child current-menu-item"><a href="/">Home</a>
+
+                                    </li>
+
+                                    <li class="has-child"><a href="/aboutus">About us</a>
+
+                                    </li>
+                                    <li class="has-child"><a href="javascript:;">Doctor</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="/doctorsignup">Doctor Signup</a></li>
+                                            <li><a href="/doctorlogin">Doctor Login</a></li>
+
+                                        </ul>                                                                 
+                                    </li>
+                                    <li class="has-child"><a href="javascript:;">User</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="/usersignup">User Signup</a></li>
+                                            <li><a href="/userlogin">User Login</a></li>
+
+                                        </ul>                                                                 
+                                    </li>
+                                    <li class="has-child">
+                                        <a href="javascript:;">Pages</a>
+                                        <ul class="sub-menu">
+
+                                            <li><a href="/adminLogin">Admin Login</a></li>
+
+
+                                        </ul>                                
+                                    </li>
+
+
+
+                                    <li class="has-child"><a href="/blog">Blog</a>
+
+                                    </li>
+
+
+
+
+
+                                    <li class="has-child"><a href="/contactus">Contact</a>
+
+                                    </li> 
+
+                                </ul>
+
+                            </div>
+
+                            <!-- Header Right Section-->
+                            <div class="extra-nav header-2-nav">
+                                <div class="extra-cell">
+
+                                 
+                                    <!--Add Listing up-->
+
+
+                                </div>                            
+
+                            </div>    
+
+                        </div>
+                    </div>
+            </header>
+        </div>
+
+         <div class="page-content">
+            <!--Banner-->
+            <div class="aon-page-benner-area">
+              <div class="aon-page-banner-row">
+                <div class="aon-page-benner-overlay" ></div>
+                <div class="sf-banner-heading-wrap">
+                  <div class="sf-banner-heading-area">
+                    <div class="sf-banner-heading-large">Contact us</div>
+                    <div class="sf-banner-breadcrumbs-nav">
+                      <ul class="list-inline">
+                        <li><a href="/"> Home </a></li>
+                        <li><a href="/contactus">Contact</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>            
+            <!--Banner-->
+
+            <!-- Contact Us-->
+            <div class="aon-contact2-area p-t80 p-b50">
+              <div class="container">
+
+                <div class="section-content">
+                      
+                    <div class="row">
+                        <!--Left Section-->
+                        <div class="col-lg-6 aon-contact-media">
+                        
+                            <div class="aon-contact-1-pic">
+                                <img src="images/contact-pic1.png" alt="">
+                            </div>
+                            <div class="aon-contact-1-bg">
+                                <span class="star-two animte-pluse2">+</span>
+                                <span class="star-three animte-pluse2">+</span>
+                                <span class="star-four animte-pluse">+</span>
+                            </div>
+                            
+                        </div>
+                        <!--Right Section-->
+                        <div class="col-lg-6">
+                            <div class="aon-contact-1-info-wrap">
+
+                                <div class="sf-contact-1-info-box">
+                                    <div class="sf-contact-1-icon">
+                                        <span><img src="images/contact-us/1.png" alt=""></span>
+                                    </div>
+                                    <div class="sf-contact-1-info">
+                                        <h4 class="sf-title">Mailing Address</h4>
+                                        <p>GURU NANAK DEV UNIVERSITY,AMRITSAR</p>
+                                    </div>
+                                </div>
+
+                                <div class="sf-contact-1-info-box">
+                                    <div class="sf-contact-1-icon">
+                                        <span><img src="images/contact-us/2.png" alt=""></span>
+                                    </div>
+                                    <div class="sf-contact-1-info">
+                                        <h4 class="sf-title">Email Info</h4>
+                                        <p>info@GNDU.com</p><p>support@GNDU.com</p>
+                                    </div>
+                                </div>
+
+                                <div class="sf-contact-1-info-box">
+                                    <div class="sf-contact-1-icon">
+                                        <span><img src="images/contact-us/3.png" alt=""></span>
+                                    </div>
+                                    <div class="sf-contact-1-info">
+                                        <h4 class="sf-title">Phone Number</h4>
+                                        <p>0800-123456 (24/7 Support Line)</p>
+                                        <p>0800-123654</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                    </div>    
+                             
+                </div>
+        
+              </div>
+            </div>
+              
+            <!-- Contact Us-->
+            <div class="section-full p-t150">
+                <div class="container">
+                  
+                    <div class="sf-contact-form2-wrap">
+                        <div class="sf-con-form-title text-center">
+                            <h2 class="m-b30">Contact Information</h2>
+                        </div>
+                        <!--Contact Form-->  
+                        <div class="sf-contact-form2 shadow">
+                            <form class="contact-form" method="post">
+                                <div class="row">
+                                    
+                                    <!-- COLUMNS 1 -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" name="fullname" placeholder="Name" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- COLUMNS 2 -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" name="email" placeholder="Email" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <!-- COLUMNS 3 -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" name="phone" placeholder="Phone" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!-- COLUMNS 4 -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" name="subject" placeholder="Subject" class="form-control" required>
+                                        </div>
+                                    </div>
+    
+                                    <!-- COLUMNS 5 -->
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <textarea name="message" placeholder="Message" class="form-control" rows="4" required></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-12">
+
+                                        <div class="g-recaptcha" data-sitekey="6LfcCr0eAAAAAN2P-3cJJC1StgxbUWvwELbMVjnp"></div>
+    
+                                    </div>
+    
+                                </div>
+                                <div class="sf-contact-submit-btn text-center">
+                                    <button class="site-button" type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!--Contact Form End-->
+                    </div>  
+          
+                </div>
+                <div class="sf-map-wrap grayscle-area">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6793.742569082773!2d74.8196677416044!3d31.63737443104212!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39196527e76e3995%3A0xf5779932d3dab5d0!2sGuru%20Nanak%20Dev%20University!5e0!3m2!1sen!2sin!4v1715153770523!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                 
+                
+                </div>
+              </div>
+                
+            </div>
+      
+
+
+        <br/>
+
+        <div th:replace="Footer:: footer"></div>
+
+        <script  src="js/jquery-3.6.0.min.js"></script> JQUERY.MIN JS 
+        <script  src="js/popper.min.js"></script> POPPER.MIN JS 
+        <script  src="js/bootstrap.min.js"></script> BOOTSTRAP.MIN JS 
+
+        <script  src="js/jquery.bootstrap-touchspin.js"></script> FORM JS 
+        <script  src="js/bootstrap-slider.min.js"></script> BOOTSTRAP Slider  
+        <script  src="js/magnific-popup.min.js"></script> MAGNIFIC-POPUP JS 
+        <script  src="js/waypoints.min.js"></script> WAYPOINTS JS 
+        <script  src="js/counterup.min.js"></script> COUNTERUP JS 
+        <script  src="js/waypoints-sticky.min.js"></script> STICKY HEADER 
+        <script  src="js/isotope.pkgd.min.js"></script> MASONRY  
+        <script  src="js/owl.carousel.min.js"></script> OWL  SLIDER  
+        <script  src="js/slick.min.js"></script> Slick SLIDER  
+        <script  src="js/theia-sticky-sidebar.js"></script> STICKY SIDEBAR  
+        <script  src="js/jquery.scrollbar.min.js"></script> MY ACCOUNT LEFT PANEL SCROLLER 
+        <script  src="js/dropzone.js"></script>IMAGE UPLOAD  
+        <script  src="js/bootstrap4-toggle.min.js"></script> BOOTSTRAP TOOGLE
+        <script  src="js/jquery.dataTables.min.js"></script>DATA TABLE
+        <script  src="js/dataTables.bootstrap4.min.js"></script> DATA TABLE
+        <script  src="js/lc_lightbox.lite.js" ></script> IMAGE POPUP 
+        <script  src="js/datepicker.min.js"></script> DATEPICKER 
+        <script  src="js/fullcalendar.min.js"></script> DATEPICKER 
+        <script src="js/recaptcha-api.js"></script> RECAPTCHA
+        <script  src="js/custom.js"></script> CUSTOM FUCTIONS  
+
+    </body>
+</html>
+
+

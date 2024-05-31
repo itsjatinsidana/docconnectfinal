@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+
+    <!-- Mirrored from aonetheme.com/mfine/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Apr 2024 18:17:18 GMT -->
+    <head>
+
+        <!-- META -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+        <meta name="robots" content="" />    
+        <meta name="description" content="" />
+
+        <!-- FAVICONS ICON -->
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+
+        <!-- PAGE TITLE HERE -->
+        <title>DocConnect</title>
+
+        <!-- MOBILE SPECIFIC -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+
+        <!-- BOOTSTRAP STYLE SHEET -->
+        <link  href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- FONTAWESOME STYLE SHEET -->
+        <link  href="css/font-awesome.min.css" rel="stylesheet">
+        <!-- Feather STYLE SHEET -->
+        <link href="css/feather.css" rel="stylesheet">
+
+        <!-- Font STYLE SHEET -->
+        <link href="css/font.css" rel="stylesheet">    
+        <!-- OWL CAROUSEL STYLE SHEET -->
+        <link href="css/owl.carousel.min.css" rel="stylesheet">
+        <!-- SLICK CAROUSEL STYLE SHEET -->
+        <link href="css/slick.min.css" rel="stylesheet">
+        <!-- SLICK STYLE SHEET -->
+        <link href="css/slick-theme.css" rel="stylesheet">
+        <!-- Custome scrollbar STYLE SHEET  -->
+        <link href="css/jquery.scrollbar.css" rel="stylesheet">  
+        <!-- DropZone STYLE SHEET  --> 
+        <link href="css/dropzone.css" rel="stylesheet">       
+        <!-- MAGNIFIC POPUP STYLE SHEET -->
+        <link href="css/magnific-popup.min.css" rel="stylesheet">
+        <!-- FLATICON STYLE SHEET -->
+        <link href="css/flaticon.min.css" rel="stylesheet">
+        <!-- Lc light box popup -->
+        <link href="css/lc_lightbox.css" rel="stylesheet">     
+        <!-- Price Range Slider -->
+        <link href="css/bootstrap-slider.min.css" rel="stylesheet">
+        <!-- Bootstrap-toggle -->
+        <link href="css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <!-- Bootstrap-datatables -->
+        <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <!-- Date-picker -->
+        <link href="css/date-picker.css" rel="stylesheet">
+        <!-- Full calendar -->
+        <link href="css/fullcalendar.min.css" rel="stylesheet">   
+        <!-- MAIN STYLE SHEET -->
+        <link href="css/style.css" rel="stylesheet">   
+
+        <script>
+
+
+            function  userGetAdminCities() {
+
+
+                // ajax fetch api code 
+
+                //servelet page
+                var url = "/getadmincities";
+                fetch(url)
+                        .then(response => response.text())
+                        .then(ans => renderAsHtml1(ans));
+            }
+
+            function renderAsHtml1(ans)
+            {
+
+
+                //step 2
+                //parsing of json
+                var mainobj = JSON.parse(ans);
+                var arr = mainobj["ans"];
+                //step3
+                var s = "";
+                // we can fetch data in json array using for loop
+                for (var i = 0; i < arr.length; i++)
+                {
+
+                    var st = arr[i];
+                    // Step 3
+                    var s = '<div class="row">'; // Start a new row
+
+// Iterate through the array of items
+                    for (var i = 0; i < arr.length; i++) {
+                        var st = arr[i];
+                        // Open a new row container for every fourth item
+                        if (i % 4 === 0 && i !== 0) {
+                            s += '</div><div class="row">'; // Close the current row and start a new one
+                        }
+
+                        // Add Bootstrap grid column for each card
+                        s += '<div class="col-md-3 mb-4">';
+                        s += '    <div class="card custom-card-style h-100">';
+                        s += '        <div class="card-body d-flex flex-column justify-content-between">';
+                        s += '            <div class="ser-shop-media">';
+                        s += '<a href="/usergetDoctorspeciality?cityname=' + st.cityname + '">';
+                        s += '<img src="/myuploads/' + st.photo + '" class="card-img-top" alt="' + st.cityname + '">';
+                        s += '</a>';
+                        s += '            </div>';
+                        s += '            <div class="ser-shop-info mt-2 text-center">';
+                        s += '                <h5 class="card-title mb-0"><a href="/usergetDoctorspeciality" class="text-decoration-none custom-link text-transform-capitalize">' + st.cityname + '</a></h5>';
+                        s += '            </div>';
+                        s += '        </div>';
+                        s += '    </div>';
+                        s += '</div>';
+                    }
+
+// Close the last row container
+                    s += '</div>';
+// Add custom CSS styling
+                    s += '<style>';
+                    s += '.custom-card-style {';
+                    s += '    border: 10px;'; // Remove border
+                    s += '    transition: transform 0.3s ease;'; // Add transition for hover effect
+                    s += '    box-shadow: 0 4px 6px rgba(1, 0, 0, 0.1);'; // Add box shadow
+                    s += '    background-color: ;';
+                    s += '}';
+                    s += '.custom-card-style:hover {';
+                    s += '    transform: translateY(-5px);'; // Add hover effect
+                    s += '    box-shadow: 10px 8px 12px rgba(0, 0, 0, 0.2);'; // Enhance shadow on hover
+                    s += '}';
+                    s += '.card-img-top {';
+                    s += '    border-radius: 8px 8px 0 0;'; // Add rounded corners to the top of the image
+                    s += '}';
+                    s += '.card-title a {';
+                    s += '    color: #333;'; // Set title link color
+                    s += '}';
+                    s += '.card-title a:hover {';
+                    s += '    color: 10px #007bff;'; // Change title link color on hover
+                    s += '}';
+                    s += '.custom-link {';
+                    s += '    color: #333;'; // Set link color
+                    s += '    text-decoration: none;'; // Remove underline
+                    s += '}';
+                    s += '.custom-link.text-transform-capitalize {';
+                    s += '    text-transform: capitalize;'; // Capitalize text
+                    s += '}';
+                    s += '.custom-link:hover {';
+                    s += '    text-decoration: underline;'; // Add underline on hover
+                    s += '}';
+                    s += '</style>';
+// Set the HTML content of the element with id "d1"
+
+
+
+
+                }
+
+
+
+                document.getElementById("d1").innerHTML = s;
+            }
+            function HideLogot() {
+                var userEmail = document.getElementById("uemail").innerText;
+                if (!userEmail) {
+                    var logoutBtn = document.getElementById("logoutBtn");
+                    if (logoutBtn) {
+                        logoutBtn.style.display = "none"; // Hide the logout button
+
+
+                    }
+
+                }
+            }
+            function HideSignUp() {
+                var userEmail = document.getElementById("uemail").innerText;
+
+                var s = ``;
+                if (userEmail) {
+
+                    var SignInBtn = document.getElementById("signinBtn");
+                    if (signinBtn) {
+                        SignInBtn.style.display = "none";
+                        s += `
+        <div class="nav-animation header-nav navbar-collapse collapse d-flex justify-content-center">
+  
+                                    <ul class=" nav navbar-nav">
+                
+         
+                                        <li class="has-child current-menu-item"><a href="/">Home</a>
+                                          
+                                        </li>
+
+                                        <li class="has-child"><a href="/aboutus">About us</a>
+                                                                                                            
+                                        </li>
+                                     
+                                      
+
+                                        <li class="has-child"><a href="/userviewslot">User View Slots</a>
+                                                                                                           
+                                        </li>
+
+                                        <li class="has-child"><a href="/blog">Blog</a>
+                                                                         
+                                        </li>
+
+
+
+                                      
+
+                                        <li class="has-child"><a href="/contactus">Contact</a>
+                                                                      
+                                        </li> 
+  <li class="has-child"><a href="/">` + userEmail + `</a>
+                                                                                                            
+                                        </li>
+                                    </ul>
+
+                                </div>
+`;
+                    }
+                    document.getElementById("sessionnav").innerHTML = s;
+                }
+
+            }
+            function searchDoctor() {
+
+
+                var url = "/searchdoctordl";
+                fetch(url)
+                        .then(response => response.text())
+                        .then(ans => renderAsHtmldoctor(ans));
+            }
+
+            function renderAsHtmldoctor(ans)
+            {
+
+
+
+                //parsing of json
+                var mainobj = JSON.parse(ans);
+                var arr = mainobj["ans"];
+
+                console.log(arr);
+                var s = "";
+                for (var i = 0; i < arr.length; i++) {
+
+                    s = s + '<option value="' + arr[i].email + '">'
+                }
+
+                document.getElementById("mylist").innerHTML = s;
+
+
+            }
+
+            function searchCity() {
+
+
+
+
+                var url = "/searchcitydl";
+
+
+                fetch(url)
+                        .then(response => response.text())
+                        .then(ans => renderResult(ans));
+            }
+
+
+            function renderResult(ans)
+            {
+
+
+
+                //parsing of json
+                var mainobj = JSON.parse(ans);
+                var arr = mainobj["ans"];
+
+                console.log(arr);
+                var s = "";
+                for (var i = 0; i < arr.length; i++) {
+                    var st = arr[i];
+
+                    s = s + '<option value="' + st.cityname + '">'
+
+
+                }
+
+                document.getElementById("mylist").innerHTML = s;
+
+
+
+            }
+            function getUserSearchCity() {
+                var city = document.getElementById("t11").value;
+
+                window.location.href = "/usergetDoctorspeciality?cityname=" + city;
+
+            }
+
+            function getUserSearchDoctor() {
+                var doctor = document.getElementById("t12").value;
+
+
+                window.location.href = "/userspecificdoc?email=" + doctor;
+
+            }
+        </script>
+    </head>
+
+    <body onload="userGetAdminCities();
+            HideLogot();
+            HideSignUp()">
+
+        <!-- LOADING AREA START ===== -->
+        <div class="loading-area">
+            <div class="loading-box"></div>
+            <div class="loading-pic">
+                <div class="cssload-wrap">
+                    <div class="cssload-container">
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- LOADING AREA  END ====== -->
+
+        <div class="page-wraper">
+
+
+            <!--            <div th:replace="Navbar:: header1"></div>-->
+            <div class="page-wraper cus-account-wrap  ">
+                <header class="site-header header-style-1 mobile-sider-drawer-menu header-full-width  ">
+                    <div class="sticky-header main-bar-wraper  navbar-expand-lg ">
+                        <div class="main-bar bg-dark-green">  
+
+                            <div class="container clearfix"> 
+                                <!--Logo section start-->
+                                <div class="logo-header">
+                                    <div class="logo-header-inner logo-header-one">
+                                        <a href="/">
+                                            <img class="logo-pic-one" src="images/doclogo.jpg" alt="">
+                                            <img class="logo-pic-two" src="images/doclogo2.jpg" alt="">
+                                        </a>
+                                    </div>
+                                </div>  
+                                <!--Logo section End-->
+
+                                <!-- NAV Toggle Button -->
+                                <button id="mobile-side-drawer" data-target=".header-nav" data-toggle="collapse" type="button" class="navbar-toggler collapsed">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar icon-bar-first"></span>
+                                    <span class="icon-bar icon-bar-two"></span>
+                                    <span class="icon-bar icon-bar-three"></span>
+                                </button> 
+
+                                <!-- MAIN Vav -->
+                                <div class="nav-animation header-nav navbar-collapse collapse d-flex justify-content-center" id="sessionnav">
+
+                                    <ul class=" nav navbar-nav">
+                                        <li class="has-child current-menu-item"><a href="/">Home</a>
+
+                                        </li>
+
+                                        <li class="has-child"><a href="/aboutus">About us</a>
+
+                                        </li>
+                                        <li class="has-child"><a href="javascript:;">Doctor</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="/doctorsignup">Doctor Signup</a></li>
+                                                <li><a href="/doctorlogin">Doctor Login</a></li>
+
+                                            </ul>                                                                 
+                                        </li>
+                                        <li class="has-child"><a href="javascript:;">User</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="/usersignup">User Signup</a></li>
+                                                <li><a href="/userlogin">User Login</a></li>
+
+                                            </ul>                                                                 
+                                        </li>
+                                        <li class="has-child">
+                                            <a href="javascript:;">Pages</a>
+                                            <ul class="sub-menu">
+
+                                                <li><a href="/adminLogin">Admin Login</a></li>
+
+
+                                            </ul>                                
+                                        </li>
+
+
+
+                                        <li class="has-child"><a href="/blog">Blog</a>
+
+                                        </li>
+
+
+
+
+
+                                        <li class="has-child"><a href="/contactus">Contact</a>
+
+                                        </li> 
+
+                                    </ul>
+
+                                </div>
+
+                                <!-- Header Right Section-->
+                                <div class="extra-nav header-2-nav">
+                                    <div class="extra-cell">
+
+                                        <!--Sign up-->
+                                        <a href="/usersignup" class="site-button aon-add-listing m-l20" id="signinBtn" >
+                                            <i class="feather-plus-circle"></i> SignUp
+                                        </a> 
+                                        <!--Add Listing up-->
+                                        <a href="/userLogout" class="site-button aon-add-listing m-l20" id="logoutBtn" >
+                                            <i class="feather-plus-circle"></i> Logout
+                                        </a> </div>
+
+                                </div>                            
+
+                            </div>    
+
+                        </div>
+                    </div>
+                </header>
+            </div>
+            <!-- HEADER END -->
+
+            <!-- CONTENT START -->
+            <div class="page-content">
+
+
+                <!-- Banner Section -->
+                <section class="aon-banner-wrap">
+                    <div class="aon-banner-row">
+                        <div class="container">
+                            <div class="row">
+                                <!--Left Section-->
+                                <div class="col-lg-6 aon-banner-colLeft">
+                                    <div class="aon-banner-pic">
+                                        <img src="images/banner/doctor.png" alt=""/>
+                                    </div>
+                                    <div class="aon-banner-bg">
+                                        <span class="star-one">+</span>
+                                        <span class="star-two animte-pluse2">+</span>
+                                        <span class="star-three animte-pluse2">+</span>
+                                        <span class="star-four animte-pluse">+</span>
+                                    </div>
+                                </div>
+                                <!--Right Section-->
+                                <div class="col-lg-6 aon-banner-colRight d-flex align-items-center">
+                                    <div class="aon-banner-right">
+                                        <h2 class="aon-banner-heading">Your Trust is Our Greatest <span>Incentive</span>!</h2>
+                                        <div class="aon-banner-text"> Welcome <span id="uemail" th:text="${session.user_email}"></span></div>
+
+                                        <div class="aon-banner-bottom">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="aon-banner-bot-col d-flex mb-4">
+                                                        <div class="aon-banner-bot-icon">
+                                                            <img src="images/banner/icon1.png" alt=""/>
+                                                        </div>
+                                                        <div class="aon-banner-bot-text">
+                                                            <strong>Doctor</strong>
+                                                            <span>Book an appointment</span>
+                                                        </div> 
+                                                    </div> 
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="aon-banner-bot-col d-flex mb-4">
+                                                        <div class="aon-banner-bot-icon">
+                                                            <img src="images/banner/icon2.png" alt=""/>
+                                                        </div>
+                                                        <div class="aon-banner-bot-text">
+                                                            <strong>Consult</strong>
+                                                            <span>Consult with top doctors</span>
+                                                        </div> 
+                                                    </div> 
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="aon-banner-bot-col d-flex mb-4">
+                                                        <div class="aon-banner-bot-icon">
+                                                            <img src="images/banner/icon3.png" alt=""/>
+                                                        </div>
+                                                        <div class="aon-banner-bot-text">
+                                                            <strong>Pharmacy</strong>
+                                                            <span>Medicines & health products</span>
+                                                        </div> 
+                                                    </div> 
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="aon-banner-bot-col d-flex mb-4">
+                                                        <div class="aon-banner-bot-icon">
+                                                            <img src="images/banner/icon4.png" alt=""/>
+                                                        </div>
+                                                        <div class="aon-banner-bot-text">
+                                                            <strong>Diagnostics</strong>
+                                                            <span>Book tests & checkups</span>
+                                                        </div> 
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Banner Section End -->  
+
+                <!-- Search Bar Home Section -->
+                <div class="aon-search1-bar-wrap">
+                    <div class="container">
+                        <div class="aon-search1-area">
+                            <div class="aon-search1-row">
+                                <ul class="nav aon-search1-tabs d-flex">
+                                    <li><a href="#hospital-tab" class="nav-link active" data-bs-toggle="pill"><i class="fa fa-hospital-o"></i> City</a></li>
+                                    <li><a href="#doctor-tab" class="nav-link" data-bs-toggle="pill"><i class="fa fa-user-md"></i> Doctor</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane container active" id="hospital-tab">
+                                        <form class="aon-search1-form">
+                                            <div class="aon-search1-left">
+                                                <div class="aon-search1-table">
+                                                    <div class="aon-search1-col aon-search-col">
+
+                                                        <div class="aon-inputicon-box aon-inputicon-bg">
+                                                            <i class="aon-input-icon feather-map-pin"></i>
+                                                            <label>Search Location</label>
+
+                                                            <input list="mylist" class="form-select" aria-label="Default select example"  id="t11" onkeyup="searchCity()" placeholder="search herre">
+
+                                                            <datalist id="mylist">
+
+
+                                                            </datalist>
+
+
+                                                        </div>
+                                                    </div>
+
+
+                                                </div> 
+                                            </div>
+                                            <div class="aon-search1-right">
+                                                <div class="aon-search1-col aon-search-btn">
+                                                    <input class="aon-search1-btn site-button" type="button" value="search" onclick="getUserSearchCity()" />
+
+
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane container fade" id="doctor-tab">
+                                        <form class="aon-search1-form">
+                                            <div class="aon-search1-left">
+                                                <div class="aon-search1-table">
+                                                    <div class="aon-search1-col aon-search-col">
+
+                                                        <div class="aon-inputicon-box aon-inputicon-bg">
+                                                            <i class="aon-input-icon feather-plus-square"></i>
+                                                            <label>Search Doctor</label>
+                                                            <input list="mylist" class="form-select" aria-label="Default select example"  id="t12" onclick="searchDoctor()" placeholder="search herre">
+
+                                                            <datalist id="mylist">
+
+
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div> 
+                                            </div>
+                                            <div class="aon-search1-right">
+                                                <div class="aon-search1-col aon-search-btn">
+                                                    <input class="aon-search1-btn site-button" type="button" onclick="getUserSearchDoctor()" value="search"/>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>  
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Search Bar Home Section End--> 
+
+                <div class="aon-med-shop-area" >
+                    <div class="container"style="margin-top: 100px">
+                        <!--Title Section Start-->
+
+                        <div class="section-head center">
+                            <h2 class="aon-title">Cities to Explore Healthcare</h2>
+                            <p>Discover diverse medical landscapes and innovative healthcare practices across the globe.</p>
+
+                            <!--Title Section End-->
+                        </div>
+                        <div id="d1"></div>
+
+
+                    </div>
+                </div>
+
+                <section class="aon-med-working-area bg-white">
+                    <div class="container">
+
+                        <!--Title Section Start-->
+                        <div class="section-head center">
+                            <span class="aon-sub-title">Working</span>
+                            <h2 class="aon-title">How DocConnect Works</h2>
+                            <p> doctor consultation website typically allows users to consult with medical professionals remotely</p>
+                        </div>
+                        <!--Title Section End-->
+
+                        <div class="section-content">
+                            <div class="aon-med-working-section">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="aon-med-working aon-icon-effect">
+                                            <div class="media">
+                                                <span><img class="aon-icon" src="images/working-icon/1.png" alt=""></span>
+                                            </div>
+                                            <div class="aon-med-working-info">
+                                                <h4>Find a Local Physiotherapist</h4>
+                                                <p>Users select their area from a list to find physiotherapists nearby.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="aon-med-working aon-icon-effect">
+                                            <div class="media">
+                                                <span><img class="aon-icon" src="images/working-icon/2.png" alt=""></span>
+                                            </div>
+                                            <div class="aon-med-working-info">
+                                                <h4>Choose Your Schedule</h4>
+                                                <p>Users select a date and time for their physiotherapy session based on their availability and the availability of the physiotherapist. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="aon-med-working aon-icon-effect">
+                                            <div class="media">
+                                                <span><img class="aon-icon" src="images/working-icon/3.png" alt=""></span>
+                                            </div>
+                                            <div class="aon-med-working-info">
+                                                <h4>Make a Payment</h4>
+                                                <p>Once the user has selected a physiotherapist and scheduled their session, they proceed to make a payment for the service. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Working Categories End --> 
+
+
+                <!-- Appointment Section -->
+                <section class="aon-med-appoint-area">
+                    <div class="container">
+
+                        <!--Title Section Start-->
+                        <div class="section-head center white">
+                            <span class="aon-sub-title">Registration</span>
+                            <h2 class="aon-title">Want to Make an Appointment Easily</h2>
+                            <p>Regain your health and mobility. Leave your pain behind. Do the things you love. 
+                                Our team of health professionals is dedicated to providing you with the best medical solutions for your injury or condition. Our specialists collaborate to find pain treatments </p>
+                            <a href="#d1" class="site-button">Book Now</a>
+                        </div>
+                        <!--Title Section End-->
+                        <div class="section-content">
+
+                            <div class="media animate-v">
+                                <img src="images/heart.png" alt="">
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section>
+                <!-- Appointment Categories End --> 
+
+
+                <!-- Achivment Section -->
+                <section class="aon-med-help-area bg-light-gray">
+                    <div class="container">
+                        <div class="section-content">
+                            <div class="aon-med-help-section">
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="aon-med-help-media shine-hover">
+                                            <div class="media curve-left animate-curve">
+                                                <div class="shine-box zoom-box">
+                                                    <img src="images/large-pic1.png" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="aon-med-help-media-info">
+                                            <h2 class="aon-title">We Can Help You Find <span>Doctor</span> And <span>Dentists</span> by City</h2>
+                                            <div class="aone-find-doc">
+                                                <form>
+                                                    <input type="text" class="form-control" placeholder="Find Doctors & Dentist">
+                                                    <button type="button"><i class="feather-search"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Achivment section End --> 
+
+                <!-- Statics Section -->
+                <section class="aon-med-statics-area bg-white">
+                    <div class="container">
+                        <div class="section-content">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6 col-sm-6">
+                                    <div class="aon-med-static-section aon-icon-effect">
+                                        <div class="media">
+                                            <span class="aon-icon"><img src="images/statics-icon/1.png" alt="#"></span>
+                                        </div>
+                                        <div class="counter-area"><span class="counter">432</span>+</div>
+                                        <div class="aon-med-static-name">Doctor</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-6 col-sm-6">
+                                    <div class="aon-med-static-section aon-icon-effect">
+                                        <div class="media">
+                                            <span class="aon-icon"><img src="images/statics-icon/2.png" alt="#"></span>
+                                        </div>
+                                        <div class="counter-area"><span class="counter">127</span>+</div>
+                                        <div class="aon-med-static-name">Customers</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-6 col-sm-6">
+                                    <div class="aon-med-static-section  aon-icon-effect">
+                                        <div class="media">
+                                            <span class="aon-icon"><img src="images/statics-icon/3.png" alt="#"></span>
+                                        </div>
+                                        <div class="counter-area"><span class="counter">752</span>+</div>
+                                        <div class="aon-med-static-name">Hospital</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-6 col-sm-6">
+                                    <div class="aon-med-static-section  aon-icon-effect">
+                                        <div class="media">
+                                            <span class="aon-icon"><img src="images/statics-icon/4.png" alt="#"></span>
+                                        </div>
+                                        <div class="counter-area"><span class="counter">432</span>+</div>
+                                        <div class="aon-med-static-name">Labs</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Statics Section End -->             
+
+                <!-- Faq Section -->
+                <section class="aon-med-faq-area bg-white">
+                    <div class="container">
+
+                        <!--Title Section Start-->
+                        <div class="section-head center">
+                            <span class="aon-sub-title">FAQs for Patients</span>
+                            <h2 class="aon-title">Frequently Ask Questions?</h2>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry the standard dummy text ever since the  when an printer took.</p>
+                        </div>
+                        <!--Title Section End-->
+
+                        <div class="section-content">
+                            <div class="aon-med-faq-section">
+                                <div class="accordion aon-med-faq" id="sf-faq-accordion">
+                                    <!--One-->
+                                    <div class="accordion-item">
+
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#FAQ1" aria-expanded="false" >
+                                            Can I book an appointment behalf or someone else?
+                                        </button>
+
+                                        <div id="FAQ1" class="accordion-collapse collapse" data-bs-parent="#sf-faq-accordion">
+                                            <div class="accordion-body">
+                                                Best service are provide us. simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!--Two-->
+                                    <div class="accordion-item">
+
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#FAQ2" aria-expanded="false">
+                                            Do I need a referral to see a Physiotherapist?
+                                        </button>
+
+                                        <div id="FAQ2" class="accordion-collapse collapse"  data-bs-parent="#sf-faq-accordion">
+                                            <div class="accordion-body">
+                                                Best service are provide us. simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!--Three-->
+                                    <div class="accordion-item">
+
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#FAQ3" aria-expanded="false">
+                                            Can I book an appointment behalf or someone else?
+                                        </button>
+
+                                        <div id="FAQ3" class="accordion-collapse collapse"  data-bs-parent="#sf-faq-accordion">
+                                            <div class="accordion-body">
+                                                Best service are provide us. simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Four-->
+                                    <div class="accordion-item">
+
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#FAQ4" aria-expanded="false">
+                                            Do you have venue option for appointments?
+                                        </button>
+
+                                        <div id="FAQ4" class="accordion-collapse collapse"  data-bs-parent="#sf-faq-accordion">
+                                            <div class="accordion-body">
+                                                Best service are provide us. simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Five-->
+                                    <div class="accordion-item">
+
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#FAQ5" aria-expanded="false">
+                                            Can I book an appointment behalf or someone else?
+                                        </button>
+
+                                        <div id="FAQ5" class="accordion-collapse collapse"  data-bs-parent="#sf-faq-accordion">
+                                            <div class="accordion-body">
+                                                Best service are provide us. simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Six-->
+                                    <div class="accordion-item">
+
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#FAQ6" aria-expanded="false">
+                                            Will I need a referral to see a Physiotherapist?
+                                        </button>
+
+                                        <div id="FAQ6" class="accordion-collapse collapse"  data-bs-parent="#sf-faq-accordion">
+                                            <div class="accordion-body">
+                                                Best service are provide us. simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Faq Categories End -->
+
+                <!-- Are You Provider Section -->
+                <section class="aon-med-help-area bg-light-gray">
+                    <div class="container">
+                        <div class="section-content">
+                            <div class="aon-med-help-section">
+                                <div class="row ">
+
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="aon-med-help-media-info">
+                                            <span class="aon-sub-title">Doctor Register</span>
+                                            <h2 class="aon-title">Are You a Provider <span>Inerrested</span> in Reaching New Patients?</h2>
+                                            <ul class="list-check-style">
+                                                <li><i class="feather-check"></i>Doctors can reach a larger pool of patients </li>
+                                                <li><i class="feather-check"></i> Remote consultations offer doctors more flexibility in managing their schedules.</li>
+                                                <li><i class="feather-check"></i>Efficiency benefits both doctors and patients by reducing wait times and improving access to care.</li>
+                                            </ul>
+
+                                            <a href="/doctorsignup" class="site-button">List Your Practice on DocConnect</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="aon-med-help-media shine-hover">
+                                            <div class="media curve-right animate-curve">
+                                                <div class="shine-box zoom-box">
+                                                    <img src="images/large-pic2.jpg" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Are You Provider Section End-->
+
+                <!-- Testimonial Section -->
+                <div class="aon-med-testimonial-area sf-curve-pos">
+                    <div class="container">
+                        <!--Title Section Start-->
+                        <div class="section-head center">
+                            <span class="aon-sub-title">Testimonials</span>
+                            <h2 class="aon-title">What People Say</h2>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry the standard dummy text ever since the  when an printer took.</p>
+                        </div>
+                        <!--Title Section End-->
+
+
+                        <div class="section-content">
+                            <div class="aon-testimonial-contaent-wrap">
+                                <div class="aon-testimonial-left">
+                                    <span class="circle-pic-l-3 animate-v2"><img src="images/testimonial-img/img3.png" alt=""></span>
+                                    <span class="circle-pic-l-1 animate-v3"><img src="images/testimonial-img/img1.png" alt=""></span>
+                                    <span class="circle-pic-l-2 animate-v2"><img src="images/testimonial-img/img2.png" alt=""></span>
+                                    <span class="circle-pic-l-4 animate-v3"></span>
+                                </div>
+                                <div class="aon-med-testimonial-mid">
+                                    <div class="owl-carousel aon-med-testimonial aon-owl-arrow">
+
+                                        <!-- COLUMNS 1 -->
+                                        <div class="item">
+
+                                            <div class="aon-med-testimonial-1 text-center">
+
+                                                <div class="aon-testimonial-quote"><i class="fa fa-plus"></i></div>
+                                                <p>Best service are provide us. simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the when an unknown printer took a galley of type and scrambled it to make specimen</p>
+
+                                                <div class="aon-testimonial-name">Maretin Chua</div>
+                                                <div class="aon-testimonial-position">Designer</div>
+                                            </div>
+
+                                        </div>
+                                        <!-- COLUMNS 2 -->
+                                        <div class="item">
+
+                                            <div class="aon-med-testimonial-1 text-center">
+
+                                                <div class="aon-testimonial-quote"><i class="fa fa-plus"></i></div>
+                                                <p>Best service are provide us. simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the when an unknown printer took a galley of type and scrambled it to make specimen</p>
+
+                                                <div class="aon-testimonial-name">David Chua</div>
+                                                <div class="aon-testimonial-position">Designer</div>
+                                            </div>
+
+                                        </div>
+                                        <!-- COLUMNS 3 -->
+                                        <div class="item">
+
+                                            <div class="aon-med-testimonial-1 text-center">
+
+                                                <div class="aon-testimonial-quote"><i class="fa fa-plus"></i></div>
+                                                <p>Best service are provide us. simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the when an unknown printer took a galley of type and scrambled it to make specimen</p>
+
+                                                <div class="aon-testimonial-name">Darren Elder</div>
+                                                <div class="aon-testimonial-position">Designer</div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="aon-testimonial-right">
+                                    <span class="circle-pic-r-3 animate-v2"><img src="images/testimonial-img/r-img3.png" alt=""></span>
+                                    <span class="circle-pic-r-1 animate-v2"><img src="images/testimonial-img/r-img1.png" alt=""></span>
+                                    <span class="circle-pic-r-2 animate-v2"><img src="images/testimonial-img/r-img2.png" alt=""></span>
+                                    <span class="circle-pic-r-4 animate-v2"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Testimonial Section End -->
+
+                <!-- Product Section -->
+
+                <!-- Product Section End -->              
+
+                <!-- Latest Blog -->
+                <section class="aon-med-blog-area">
+                    <div class="container">
+
+                        <!--Title Section Start-->
+                        <div class="section-head center">
+                            <span class="aon-sub-title">Blog</span>
+                            <h2 class="aon-title">Latest News & Articles</h2>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry the standard dummy text ever since the  when an printer took.</p>
+                        </div>
+                        <!--Title Section End-->
+
+
+                        <div class="section-content">
+                            <div class="aon-med-blog-section">
+                                <div class="row d-flex justify-content-center">
+                                    <!-- COLUMNS 1 -->
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="aon-med-blog-style-1 shine-hover">
+                                            <div class="post-bx">
+                                                <!-- Content section for blogs start -->
+                                                <div class="post-thum shine-box"> 
+                                                    <img title="title" alt="" src="images/blog/blog-grid/1.jpg">
+                                                </div>
+                                                <div class="post-info">
+
+                                                    <div class="post-date">
+                                                        <span class="date-dd">18</span>
+                                                        <span>Aug</span>
+                                                        <span>2022</span>
+                                                    </div> 
+
+                                                    <div class="post-meta">
+                                                        <ul>
+                                                            <li class="post-author"><i class="feather-user"></i> By <a href="#">Admin</a></li>
+                                                            <li class="post-comment"><i class="feather-message-square"></i> 8 Comment</li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="post-text">
+                                                        <h4 class="post-title">
+                                                            <a href="blog-detail.html">Medical Technology Innovation Center Training Center</a>
+                                                        </h4>
+                                                        <p>New chip traps clusters of migrating tumor cells asperiortenetur, blanditiis odit.</p>
+                                                        <a href="blog-detail.html" class="site-btn-link">Read More</a>
+                                                    </div>
+
+                                                </div>
+                                                <!-- Content section for blogs end -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- COLUMNS 2 -->
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="aon-med-blog-style-1 shine-hover">
+                                            <div class="post-bx">
+                                                <!-- Content section for blogs start -->
+                                                <div class="post-thum shine-box"> 
+                                                    <img title="title" alt="" src="images/blog/blog-grid/2.jpg">
+                                                </div>
+                                                <div class="post-info">
+
+                                                    <div class="post-date">
+                                                        <span class="date-dd">18</span>
+                                                        <span>Aug</span>
+                                                        <span>2022</span>
+                                                    </div> 
+
+                                                    <div class="post-meta">
+                                                        <ul>
+                                                            <li class="post-author"><i class="feather-user"></i> By <a href="#">Admin</a></li>
+                                                            <li class="post-comment"><i class="feather-message-square"></i> 8 Comment</li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="post-text">
+                                                        <h4 class="post-title">
+                                                            <a href="blog-detail.html">Benefiting from healthcare shouldn’t be a matter of luck.</a>
+                                                        </h4>
+                                                        <p>New chip traps clusters of migrating tumor cells asperiortenetur, blanditiis odit.</p>
+                                                        <a href="blog-detail.html" class="site-btn-link">Read More</a>
+                                                    </div>
+
+                                                </div>
+                                                <!-- Content section for blogs end -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- COLUMNS 3 -->
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="aon-med-blog-style-1 shine-hover">
+                                            <div class="post-bx">
+                                                <!-- Content section for blogs start -->
+                                                <div class="post-thum shine-box"> 
+                                                    <img title="title" alt="" src="images/blog/blog-grid/3.jpg">
+                                                </div>
+                                                <div class="post-info">
+
+                                                    <div class="post-date">
+                                                        <span class="date-dd">18</span>
+                                                        <span>Aug</span>
+                                                        <span>2022</span>
+                                                    </div> 
+
+                                                    <div class="post-meta">
+                                                        <ul>
+                                                            <li class="post-author"><i class="feather-user"></i> By <a href="#">Admin</a></li>
+                                                            <li class="post-comment"><i class="feather-message-square"></i> 8 Comment</li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="post-text">
+                                                        <h4 class="post-title">
+                                                            <a href="blog-detail.html">Caring for the whole patient, not just your symptoms</a>
+                                                        </h4>
+                                                        <p>New chip traps clusters of migrating tumor cells asperiortenetur, blanditiis odit.</p>
+                                                        <a href="blog-detail.html" class="site-btn-link">Read More</a>
+                                                    </div>
+
+                                                </div>
+                                                <!-- Content section for blogs end -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+                <!-- Latest Blog End -->
+
+
+
+            </div>
+            <!-- CONTENT END -->
+ <div th:replace="Footer:: footer"></div>
+            <!-- FOOTER START -->
+<!--            <footer class="site-footer footer-light" >
+                 FOOTER NEWSLETTER START   
+                <div class="footer-top-newsletter">
+                    <div class="container">
+                        <div class="sf-news-letter">
+                            <span>Subscribe Our Newsletter</span>
+                            <form>
+                                <div class="sf-news-l-form">
+                                    <input type="text" class="form-control" placeholder="Enter Your Email">
+                                    <button type="submit" class="sf-sb-btn">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                 FOOTER BLOCKES START   
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+                             COLUMNS 1 
+                            <div class="col-md-3 col-sm-6 col-xs-6">
+                                <div class="sf-site-link sf-widget-link">
+                                    <h4 class="aon-f-title">About</h4>
+                                    <p>The printing and typesetting industry Ipsum has been the industry's thanks to your passion, hard work creativity</p>
+                                    <ul class="aon-socila-icon d-flex">
+                                        <li><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="javascript:void(0);"><i class="fa fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                             COLUMNS 2 
+                            <div class="col-md-3 col-sm-6 col-xs-6">
+                                <div class="sf-site-link sf-widget-cities">
+                                    <h4 class="aon-f-title">Quick Links</h4>
+                                    <ul>
+                                        <li><a href="about-us.html">About</a></li>
+                                        <li><a href="lab-test.html">Lab Test</a></li>
+                                        <li><a href="medicince.html">Medicine</a></li>
+                                        <li><a href="blog-list.html">Blog</a></li>
+                                        <li><a href="contact-us.html">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                             COLUMNS 3 
+                            <div class="col-md-3 col-sm-6 col-xs-6">
+                                <div class="sf-site-link sf-widget-categories">
+                                    <h4 class="aon-f-title">Quick Links</h4>
+                                    <ul>
+                                        <li><a href="about-us.html">About</a></li>
+                                        <li><a href="lab-test.html">Lab Test</a></li>
+                                        <li><a href="medicince.html">Medicine</a></li>
+                                        <li><a href="blog-list.html">Blog</a></li>
+                                        <li><a href="contact-us.html">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                             COLUMNS 4 
+                            <div class="col-md-3 col-sm-6 col-xs-6">
+                                <div class="sf-site-link sf-widget-contact">
+                                    <h4 class="aon-f-title">Community</h4>
+                                    <ul>
+                                        <li>Australia</li>
+                                        <li>+41 232 525 5257</li>
+                                        <li>+41 856 525 5369</li>
+                                        <li>hello@Servicefinder.com</li>
+                                        <li>hello@aontheme.com</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                 FOOTER COPYRIGHT 
+                <div class="footer-bottom">
+                    <div class="container">
+                        <div class="aon-footer-bottom-area">
+                            <div class="aon-foo-copyright">
+                                <span>Copyright 2022 | Aone Theme. All Rights Reserved</span>
+                            </div>
+                        </div>
+                    </div>   
+                </div>   
+
+            </footer>-->
+            <!-- FOOTER END -->
+
+            <!-- BUTTON TOP START -->
+            <button class="scroltop"><span class="fa fa-angle-up  relative" id="btn-vibrate"></span></button>
+
+        </div>
+
+
+
+        <!-- JAVASCRIPT  FILES ========================================= --> 
+        <script  src="js/jquery-3.6.0.min.js"></script><!-- JQUERY.MIN JS -->
+        <script  src="js/popper.min.js"></script><!-- POPPER.MIN JS -->
+        <script  src="js/bootstrap.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+
+        <script  src="js/jquery.bootstrap-touchspin.js"></script><!-- FORM JS -->
+        <script  src="js/bootstrap-slider.min.js"></script><!-- BOOTSTRAP Slider --> 
+        <script  src="js/magnific-popup.min.js"></script><!-- MAGNIFIC-POPUP JS -->
+        <script  src="js/waypoints.min.js"></script><!-- WAYPOINTS JS -->
+        <script  src="js/counterup.min.js"></script><!-- COUNTERUP JS -->
+        <script  src="js/waypoints-sticky.min.js"></script><!-- STICKY HEADER -->
+        <script  src="js/isotope.pkgd.min.js"></script><!-- MASONRY  -->
+        <script  src="js/owl.carousel.min.js"></script><!-- OWL  SLIDER  -->
+        <script  src="js/slick.min.js"></script><!-- Slick SLIDER  -->
+        <script  src="js/theia-sticky-sidebar.js"></script><!-- STICKY SIDEBAR  -->
+        <script  src="js/jquery.scrollbar.min.js"></script><!-- MY ACCOUNT LEFT PANEL SCROLLER -->
+        <script  src="js/dropzone.js"></script><!--IMAGE UPLOAD-->  
+        <script  src="js/bootstrap4-toggle.min.js"></script><!-- BOOTSTRAP TOOGLE-->
+        <script  src="js/jquery.dataTables.min.js"></script><!--DATA TABLE-->
+        <script  src="js/dataTables.bootstrap4.min.js"></script><!-- DATA TABLE-->
+        <script  src="js/lc_lightbox.lite.js" ></script><!-- IMAGE POPUP -->
+        <script  src="js/datepicker.min.js"></script><!-- DATEPICKER -->
+        <script  src="js/fullcalendar.min.js"></script><!-- DATEPICKER -->
+        <script src="js/recaptcha-api.js"></script><!-- RECAPTCHA-->
+        <script  src="js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
+
+
+
+
+    </body>
+
+
+    <!-- Mirrored from aonetheme.com/mfine/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Apr 2024 18:17:43 GMT -->
+</html>
+
+
+
+

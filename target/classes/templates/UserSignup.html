@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>DocConnect</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+        <meta name="robots" content="" />    
+        <meta name="description" content="" />
+
+        <!-- FAVICONS ICON -->
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+
+        <!-- PAGE TITLE HERE -->
+        <title>DocConnect</title>
+
+        <!-- MOBILE SPECIFIC -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+
+        <!-- BOOTSTRAP STYLE SHEET -->
+        <link  href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- FONTAWESOME STYLE SHEET -->
+        <link  href="css/font-awesome.min.css" rel="stylesheet">
+        <!-- Feather STYLE SHEET -->
+        <link href="css/feather.css" rel="stylesheet">
+
+        <!-- Font STYLE SHEET -->
+        <link href="css/font.css" rel="stylesheet">    
+        <!-- OWL CAROUSEL STYLE SHEET -->
+        <link href="css/owl.carousel.min.css" rel="stylesheet">
+        <!-- SLICK CAROUSEL STYLE SHEET -->
+        <link href="css/slick.min.css" rel="stylesheet">
+        <!-- SLICK STYLE SHEET -->
+        <link href="css/slick-theme.css" rel="stylesheet">
+        <!-- Custome scrollbar STYLE SHEET  -->
+        <link href="css/jquery.scrollbar.css" rel="stylesheet">  
+        <!-- DropZone STYLE SHEET  --> 
+        <link href="css/dropzone.css" rel="stylesheet">       
+        <!-- MAGNIFIC POPUP STYLE SHEET -->
+        <link href="css/magnific-popup.min.css" rel="stylesheet">
+        <!-- FLATICON STYLE SHEET -->
+        <link href="css/flaticon.min.css" rel="stylesheet">
+        <!-- Lc light box popup -->
+        <link href="css/lc_lightbox.css" rel="stylesheet">     
+        <!-- Price Range Slider -->
+        <link href="css/bootstrap-slider.min.css" rel="stylesheet">
+        <!-- Bootstrap-toggle -->
+        <link href="css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <!-- Bootstrap-datatables -->
+        <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <!-- Date-picker -->
+        <link href="css/date-picker.css" rel="stylesheet">
+        <!-- Full calendar -->
+        <link href="css/fullcalendar.min.css" rel="stylesheet">   
+        <!-- MAIN STYLE SHEET -->
+        <link href="css/style.css" rel="stylesheet">   
+
+        <!-- SWEETALERT LIBRARY -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+        <script>
+            function previewFile() {
+                const preview = document.getElementById('previewImage');
+                const file = document.getElementById('file').files[0];
+                const reader = new FileReader();
+
+                reader.onloadend = function () {
+                    preview.src = reader.result;
+                };
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                    preview.src = "images/team/pic1.jpg";
+                }
+            }
+
+            function userSignup() {
+
+                var name = document.getElementById("name").value;
+                var email = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+                var conpassword = document.getElementById("conpassword").value;
+
+                var photo = document.getElementById("file").files[0];
+
+                var contact = document.getElementById("number").value;
+                var address = document.getElementById("address").value;
+
+
+
+                var dob = document.getElementById("dob").value;
+
+                var bloodgroup = document.getElementById("bloodgroup").value;
+                var genderRadios = document.getElementsByName("selectedGender");
+                var selectedGender = "";
+                for (var i = 0; i < genderRadios.length; i++) {
+                    if (genderRadios[i].checked) {
+                        selectedGender = genderRadios[i].value;
+                        break;
+                    }
+                }
+                if (name == "" || email == "" || contact == "" || password == "" || conpassword == "" || address == "" || dob == "" || bloodgroup == "")
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Enter The Form Properly !'
+                    });
+                } else if (contact.length != 10)
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Enter the Phone Number Properly !'
+                    });
+                } else if (email.indexOf("@") == -1)
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Enter Email in Proper Format !'
+                    });
+                } else if (password != conpassword)
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Password & Confirm Passowrd must match !'
+                    });
+                } else
+                {
+
+                    var formdata = new FormData();
+                    formdata.append("name", name);
+                    formdata.append("email", email);
+                    formdata.append("password", password);
+
+
+
+
+                    formdata.append("contact", contact);
+
+
+                    formdata.append("address", address);
+                    formdata.append("dob", dob);
+                    formdata.append("bloodgroup", bloodgroup);
+                    formdata.append("selectedGender", selectedGender);
+                    formdata.append("f1", photo);
+
+                    var url = "./usersignuppage1";
+
+                    fetch(url, {method: "POST", body: formdata})
+                            .then(response => response.text())
+                            .then(ans => renderAsHtml(ans));
+                }
+
+                function renderAsHtml(ans)
+                {
+
+                    if (ans === "success")
+                    {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Signup Successful',
+                            text: 'You have successfully signed up!',
+                            showConfirmButton: true,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "/userlogin";
+                            }
+                        });
+
+
+
+                    } else if (ans === "fail")
+                    {
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Signup Failed',
+                            text: 'Signup failed or email already exists!',
+                        });
+                    } else if (ans === "exception")
+                    {
+                        alert(ans);
+                    }
+                }
+
+            }
+
+        </script>
+
+
+    </head>
+    <body>
+
+        <div class="loading-area">
+            <div class="loading-box"></div>
+            <div class="loading-pic">
+                <div class="cssload-wrap">
+                    <div class="cssload-container">
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!--        <div th:replace="Navbar:: header"></div>-->
+
+        <div class="page-content">
+            <!--Banner-->
+            <div class="aon-page-benner-area">
+                <div class="aon-page-banner-row">
+                    <div class="aon-page-benner-overlay" ></div>
+                    <div class="sf-banner-heading-wrap">
+                        <div class="sf-banner-heading-area">
+                            <div class="sf-banner-heading-large">User Signup</div>
+                            <div class="sf-banner-breadcrumbs-nav">
+                                <ul class="list-inline">
+                                    <li><a href="/">Home </a></li>
+                                    <li><a href="https://aonetheme.com/latest-service-finder/providers-category/packers-and-movers/">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+
+
+
+
+            <div class="content-admin-main">
+
+                <div class="aon-admin-heading">
+                    <h3>User Registration</h3>
+                </div>  
+
+                <div class="card aon-card">
+                    <div class="card-body aon-card-body">
+                        <div class="cus-pai-regis-form row">
+                            <div class="cus-pai-regis-left col">
+                                <div class="aon-pro-avtar-pic">
+                                    <div class="aon-proAvtar-media">
+                                        <img src="images/team/pic1.jpg" id="previewImage" alt="">
+                                    </div>
+                                    <br/>
+
+                                    <input type="file" value="photo" id="file" onchange="previewFile()"/>
+
+                                </div>
+                            </div>
+                            <div class="cus-pai-regis-right col">
+                                <div class="row">
+
+                                    <div class="col-xl-4 col-lg-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>User Name</label>
+                                            <div class="aon-inputicon-box"> 
+                                                <input class="form-control sf-form-control" name="company_name" type="text" id="name">
+                                                <i class="aon-input-icon fa fa-user"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Mobile Number</label>
+                                            <div class="aon-inputicon-box"> 
+                                                <input class="form-control sf-form-control" name="company_name" type="number" id="number">
+                                                <i class="aon-input-icon fa fa-phone"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Email Address</label>
+                                            <div class="aon-inputicon-box"> 
+                                                <input class="form-control sf-form-control" name="company_name" type="email" id="email">
+                                                <i class="aon-input-icon fa fa-user"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xl-4 col-lg-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Gender</label>
+                                            <div class="aon-inputicon-box"> 
+
+                                                <div class="radio-inline-box sf-radio-check-row" id="tutorial">
+
+                                                    <div class="checkbox sf-radio-checkbox sf-radio-check-2 sf-raChe-6">
+                                                        <input id="male" name="selectedGender" value="male" type="radio">
+                                                        <label for="male">Male</label>
+                                                    </div>
+                                                    <div class="checkbox sf-radio-checkbox sf-radio-check-2 sf-raChe-6">
+                                                        <input id="female" name="selectedGender" value="female" type="radio">
+                                                        <label for="female">Female</label>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4 col-lg-6 col-sm-6">
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>DOB or Age</label>
+                                                <div class="aon-inputicon-box"> 
+                                                    <input class="form-control sf-form-control"  name="company_name" id="dob" type="text" placeholder="DD / MM / YYYY">
+                                                    <i class="aon-input-icon fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4 col-lg-6 col-sm-6">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Blood Group</label>
+                                                <select class="form-select" id="bloodgroup" aria-label="Default select example">
+                                                    <option>O +VE</option>
+                                                    <option>A+VE</option>
+                                                    <option>B +VE</option>
+                                                    <option>O -VE</option>
+                                                    <option>A -VE</option>
+                                                    <option>B -VE</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                    <div class="col-xl-6 col-lg-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <div class="aon-inputicon-box"> 
+                                                <input class="form-control sf-form-control"id="password" name="company_name" type="password">
+                                                <i class="aon-input-icon fa fa-user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Confirm Password</label>
+                                            <div class="aon-inputicon-box"> 
+                                                <input class="form-control sf-form-control" id="conpassword" name="company_name" type="password">
+                                                <i class="aon-input-icon fa fa-user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xl-12 col-lg-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <div class="aon-inputicon-box"> 
+                                                <input class="form-control t-area-height" name="street address" id="address" type="text">
+                                                <i class="aon-input-icon fa fa-map-marker"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <input type="button" style="display: block; margin: 0 auto;"  value="Save" onclick="userSignup()" class="admin-button" >
+
+                    </div>
+
+                </div>
+
+                <div class="login-section">
+                    <h3>Already have an account? </h3>
+                    <h4> Log in here: <a style="text-decoration: underline;color: blue" href="/userlogin">Login</a></h4>
+
+                </div>
+
+            </div>
+        </div>
+
+        <br/><!-- comment -->
+
+        <div th:replace="Footer:: footer"></div>
+        <script  src="js/jquery-3.6.0.min.js"></script><!-- JQUERY.MIN JS -->
+        <script  src="js/popper.min.js"></script><!-- POPPER.MIN JS -->
+        <script  src="js/bootstrap.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+
+        <script  src="js/jquery.bootstrap-touchspin.js"></script><!-- FORM JS -->
+        <script  src="js/bootstrap-slider.min.js"></script><!-- BOOTSTRAP Slider --> 
+        <script  src="js/magnific-popup.min.js"></script><!-- MAGNIFIC-POPUP JS -->
+        <script  src="js/waypoints.min.js"></script><!-- WAYPOINTS JS -->
+        <script  src="js/counterup.min.js"></script><!-- COUNTERUP JS -->
+        <script  src="js/waypoints-sticky.min.js"></script><!-- STICKY HEADER -->
+        <script  src="js/isotope.pkgd.min.js"></script><!-- MASONRY  -->
+        <script  src="js/owl.carousel.min.js"></script><!-- OWL  SLIDER  -->
+        <script  src="js/slick.min.js"></script><!-- Slick SLIDER  -->
+        <script  src="js/theia-sticky-sidebar.js"></script><!-- STICKY SIDEBAR  -->
+        <script  src="js/jquery.scrollbar.min.js"></script><!-- MY ACCOUNT LEFT PANEL SCROLLER -->
+        <script  src="js/dropzone.js"></script><!--IMAGE UPLOAD-->  
+        <script  src="js/bootstrap4-toggle.min.js"></script><!-- BOOTSTRAP TOOGLE-->
+        <script  src="js/jquery.dataTables.min.js"></script><!--DATA TABLE-->
+        <script  src="js/dataTables.bootstrap4.min.js"></script><!-- DATA TABLE-->
+        <script  src="js/lc_lightbox.lite.js" ></script><!-- IMAGE POPUP -->
+        <script  src="js/datepicker.min.js"></script><!-- DATEPICKER -->
+        <script  src="js/fullcalendar.min.js"></script><!-- DATEPICKER -->
+        <script src="js/recaptcha-api.js"></script><!-- RECAPTCHA-->
+        <script  src="js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
+
+    </body>
+</html>
