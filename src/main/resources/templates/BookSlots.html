@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+
+    <!-- Mirrored from aonetheme.com/mfine/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Apr 2024 18:17:18 GMT -->
+    <head>
+
+        <!-- META -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+        <meta name="robots" content="" />    
+        <meta name="description" content="" />
+
+        <!-- FAVICONS ICON -->
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+
+        <!-- PAGE TITLE HERE -->
+        <title>DocConnect</title>
+
+        <!-- MOBILE SPECIFIC -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+
+        <!-- BOOTSTRAP STYLE SHEET -->
+        <link  href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- FONTAWESOME STYLE SHEET -->
+        <link  href="css/font-awesome.min.css" rel="stylesheet">
+        <!-- Feather STYLE SHEET -->
+        <link href="css/feather.css" rel="stylesheet">
+
+        <!-- Font STYLE SHEET -->
+        <link href="css/font.css" rel="stylesheet">    
+        <!-- OWL CAROUSEL STYLE SHEET -->
+        <link href="css/owl.carousel.min.css" rel="stylesheet">
+        <!-- SLICK CAROUSEL STYLE SHEET -->
+        <link href="css/slick.min.css" rel="stylesheet">
+        <!-- SLICK STYLE SHEET -->
+        <link href="css/slick-theme.css" rel="stylesheet">
+        <!-- Custome scrollbar STYLE SHEET  -->
+        <link href="css/jquery.scrollbar.css" rel="stylesheet">  
+        <!-- DropZone STYLE SHEET  --> 
+        <link href="css/dropzone.css" rel="stylesheet">       
+        <!-- MAGNIFIC POPUP STYLE SHEET -->
+        <link href="css/magnific-popup.min.css" rel="stylesheet">
+        <!-- FLATICON STYLE SHEET -->
+        <link href="css/flaticon.min.css" rel="stylesheet">
+        <!-- Lc light box popup -->
+        <link href="css/lc_lightbox.css" rel="stylesheet">     
+        <!-- Price Range Slider -->
+        <link href="css/bootstrap-slider.min.css" rel="stylesheet">
+        <!-- Bootstrap-toggle -->
+        <link href="css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <!-- Bootstrap-datatables -->
+        <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <!-- Date-picker -->
+        <link href="css/date-picker.css" rel="stylesheet">
+        <!-- Full calendar -->
+        <link href="css/fullcalendar.min.css" rel="stylesheet">   
+        <!-- MAIN STYLE SHEET -->
+        <link href="css/style.css" rel="stylesheet">   
+
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+
+        <script>
+
+            function go() {
+                
+                
+                var email = document.getElementById("display").innerText;
+
+                var s = document.getElementById("datepicker").value;
+                console.log(s);
+                
+                if(s === '')
+                {
+                    alert("Choose Dates first");
+                }else{
+                    
+                var url = "./view_slots?email=" + email + "&date=" + s;
+                fetch(url)
+                        .then(response => response.text())
+                        .then(ans => renderhtml(ans));
+                }
+
+
+            }
+
+            var slot_amount = 0;
+            function renderhtml(ans) {
+                var mainobj = JSON.parse(ans);
+                var arr = mainobj.ans;
+                var count = 1;
+                var output = '<table class="table table-hover">';
+                output += ' <tr>';
+                output += ' <th>index number</th>';
+                output += '<th>start slot</th>';
+                output += '<th>end slot</th>';
+
+                output += '<th>status</th>';
+                output += '</tr>';
+                for (var i = 0; i < arr.length; i++) {
+                    var obj = arr[i];
+                    output += '<tr>';
+                    if (obj.status === "Booked") {
+                        output += '<td><input type="checkbox" disabled/></td>';
+                    } else {
+                        output += '<td><input type="checkbox" name="c1" id="check" value="' + obj.start_slot + '" onchange="slot(this)" /></td>';
+                    }
+                    output += '<td>' + obj.start_slot + '</td>';
+                    output += '<td>' + obj.end_slot + '</td>';
+                    output += '<td>' + obj.status + '</td>';
+                    slot_amount = obj.slot_amount;
+
+                    output += '</tr>';
+                    count++;
+                }
+                output += '</table>';
+                document.getElementById("table").innerHTML = output;
+
+            }
+
+            var count = 0;
+            var total = 0;
+            function slot(checkbox) {
+
+                if (checkbox.checked) {
+
+                    count++;
+                } else {
+
+                    count--;
+                }
+
+                total = count * slot_amount;
+                var output = '<table class="table table-hover">';
+                output += '<tr>';
+                output += '<td> Number of slots </td>';
+                output += '<td>' + count + '</td>';
+                output += '</tr>';
+                output += '<tr>';
+                output += '<td> total value </td>';
+                output += '<td>' + total + '</td>';
+                output += '</tr>';
+
+                output += '</table>';
+                output += '<input type="button" class="btn btn-primary form-control mt-2" value="click on the button to pay the value" onclick="pay()"/>';
+                document.getElementById("slot").innerHTML = output;
+            }
+
+            var allslots = '';
+            function pay() {
+
+                var c = document.getElementsByName("c1");
+                var date = document.getElementById("datepicker").value;
+                var email = document.getElementById("display").innerText;
+                console.log(c);
+                for (var i = 0; i < c.length; i++) {
+
+                    if (c[i].checked) {
+                        allslots += c[i].value + ",";
+                    }
+                }
+                window.location.href = "payment?date=" + date + "&email=" + email + "&total=" + total + "&slots=" + allslots + " ";
+            }
+
+        </script>
+
+
+
+    </head>
+
+    <body >
+        <div id="display" th:text="${email}" style="display: none" >
+
+        </div>
+        <!-- LOADING AREA START ===== -->
+        <div class="loading-area">
+            <div class="loading-box"></div>
+            <div class="loading-pic">
+                <div class="cssload-wrap">
+                    <div class="cssload-container">
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- LOADING AREA  END ====== -->
+
+        <div class="page-wraper">
+
+
+<!--            <div th:replace="UserNavbar1:: header1"></div>-->
+ <div th:replace="UserNavbar1:: userheader1"></div>
+            <br/>
+            <br/><br/><br/>
+
+
+            <div id="container-fluid">
+
+                <div class="content-admin-main">
+
+                    <div class="aon-admin-heading d-flex justify-content-between">
+                        <div class="aon-admin-heading-right">
+                            <h3>Book Slots</h3>
+                        </div>
+
+                        <div class="aon-admin-heading-right">
+                            <h3>Select Date</h3>
+                        </div>
+
+
+                        <div class="aon-admin-heading-right">
+                            <button onclick="go()" type="button" class="admin-button add-team-btn"><i class="fa fa-plus"></i> Fetch Data</button>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="text-center alert alert-success" style="margin-top: 70px">
+                    <h3>Date: <input type="text" id="datepicker" class="alet alert-warning"></h3>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 m-3  " id="table" >
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+
+                    </div>
+                    <div class="col-sm-4 m-3" id="slot">
+
+                    </div>
+                    <div class="col-sm-4">
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+            <br/>
+            <br/>
+            <br/>
+            <br/>   <br/>   <br/>   <br/>   <br/>   <br/>
+            <div th:replace="Footer:: footer"></div>
+        </div>
+        <button class="scroltop"><span class="fa fa-angle-up  relative" id="btn-vibrate"></span></button>
+
+
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+        <script>
+                                $(function () {
+                                    $("#datepicker").datepicker();
+                                });
+        </script>
+
+
+        <!-- JAVASCRIPT  FILES ========================================= --> 
+        <script  src="js/jquery-3.6.0.min.js"></script><!-- JQUERY.MIN JS -->
+        <script  src="js/popper.min.js"></script><!-- POPPER.MIN JS -->
+        <script  src="js/bootstrap.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+
+        <script  src="js/jquery.bootstrap-touchspin.js"></script><!-- FORM JS -->
+        <script  src="js/bootstrap-slider.min.js"></script><!-- BOOTSTRAP Slider --> 
+        <script  src="js/magnific-popup.min.js"></script><!-- MAGNIFIC-POPUP JS -->
+        <script  src="js/waypoints.min.js"></script><!-- WAYPOINTS JS -->
+        <script  src="js/counterup.min.js"></script><!-- COUNTERUP JS -->
+        <script  src="js/waypoints-sticky.min.js"></script><!-- STICKY HEADER -->
+        <script  src="js/isotope.pkgd.min.js"></script><!-- MASONRY  -->
+        <script  src="js/owl.carousel.min.js"></script><!-- OWL  SLIDER  -->
+        <script  src="js/slick.min.js"></script><!-- Slick SLIDER  -->
+        <script  src="js/theia-sticky-sidebar.js"></script><!-- STICKY SIDEBAR  -->
+        <script  src="js/jquery.scrollbar.min.js"></script><!-- MY ACCOUNT LEFT PANEL SCROLLER -->
+        <script  src="js/dropzone.js"></script><!--IMAGE UPLOAD-->  
+        <script  src="js/bootstrap4-toggle.min.js"></script><!-- BOOTSTRAP TOOGLE-->
+        <script  src="js/jquery.dataTables.min.js"></script><!--DATA TABLE-->
+        <script  src="js/dataTables.bootstrap4.min.js"></script><!-- DATA TABLE-->
+        <script  src="js/lc_lightbox.lite.js" ></script><!-- IMAGE POPUP -->
+        <script  src="js/datepicker.min.js"></script><!-- DATEPICKER -->
+        <script  src="js/fullcalendar.min.js"></script><!-- DATEPICKER -->
+        <script src="js/recaptcha-api.js"></script><!-- RECAPTCHA-->
+        <script  src="js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
+
+
+
+
+    </body>
+
+
+    <!-- Mirrored from aonetheme.com/mfine/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Apr 2024 18:17:43 GMT -->
+</html>
+
+
+
+

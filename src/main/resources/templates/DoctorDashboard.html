@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>DocConnect</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+        <meta name="robots" content="" />    
+        <meta name="description" content="" />
+
+        <!-- FAVICONS ICON -->
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+
+        <!-- PAGE TITLE HERE -->
+        <title>DocConnect</title>
+
+        <!-- MOBILE SPECIFIC -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+
+        <!-- BOOTSTRAP STYLE SHEET -->
+        <link  href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- FONTAWESOME STYLE SHEET -->
+        <link  href="css/font-awesome.min.css" rel="stylesheet">
+        <!-- Feather STYLE SHEET -->
+        <link href="css/feather.css" rel="stylesheet">
+
+        <!-- Font STYLE SHEET -->
+        <link href="css/font.css" rel="stylesheet">    
+        <!-- OWL CAROUSEL STYLE SHEET -->
+        <link href="css/owl.carousel.min.css" rel="stylesheet">
+        <!-- SLICK CAROUSEL STYLE SHEET -->
+        <link href="css/slick.min.css" rel="stylesheet">
+        <!-- SLICK STYLE SHEET -->
+        <link href="css/slick-theme.css" rel="stylesheet">
+        <!-- Custome scrollbar STYLE SHEET  -->
+        <link href="css/jquery.scrollbar.css" rel="stylesheet">  
+        <!-- DropZone STYLE SHEET  --> 
+        <link href="css/dropzone.css" rel="stylesheet">       
+        <!-- MAGNIFIC POPUP STYLE SHEET -->
+        <link href="css/magnific-popup.min.css" rel="stylesheet">
+        <!-- FLATICON STYLE SHEET -->
+        <link href="css/flaticon.min.css" rel="stylesheet">
+        <!-- Lc light box popup -->
+        <link href="css/lc_lightbox.css" rel="stylesheet">     
+        <!-- Price Range Slider -->
+        <link href="css/bootstrap-slider.min.css" rel="stylesheet">
+        <!-- Bootstrap-toggle -->
+        <link href="css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <!-- Bootstrap-datatables -->
+        <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <!-- Date-picker -->
+        <link href="css/date-picker.css" rel="stylesheet">
+        <!-- Full calendar -->
+        <link href="css/fullcalendar.min.css" rel="stylesheet">   
+        <!-- MAIN STYLE SHEET -->
+        <link href="css/style.css" rel="stylesheet">   
+
+        <style>
+            .testimonial-card .card-up {
+                height: 120px;
+                overflow: hidden;
+                border-top-left-radius: .25rem;
+                border-top-right-radius: .25rem;
+            }
+
+            .aqua-gradient {
+                background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
+            }
+
+            .testimonial-card .avatar {
+                width: 120px;
+                margin-top: -60px;
+                overflow: hidden;
+                border: 5px solid #fff;
+                border-radius: 50%;
+            }
+
+            .card {
+                box-shadow: 0 10px 8px 0 rgba(0,0,0,0.2);
+                transition: 0.3s;
+                margin-bottom: 20px;
+            }
+
+            .card:hover {
+                box-shadow: #04414d 10px 8px 16px 0 ;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!--        <div th:replace="Navbar:: header1"></div>-->
+        <div th:replace="DoctorNavbar:: doctorheader"></div>
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div class="container">
+            <h1 class="h1" style="text-align: center"> Welcome DR. <span th:text="${session.name}"></span></h1>
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <a href="/managedoctorprofile">  <section class="mx-auto my-5" style="max-width: 23rem;">
+                            <div class="card testimonial-card mt-2 mb-3">
+
+
+                                <img src="images/manageprofile.png" width="width" height="height" alt="alt"/>
+
+                                <div class="card-body text-center">
+                                    <h4 class="card-title font-weight-bold">Manage Profile</h4>
+                                    <hr>
+                                </div>
+                            </div>
+                        </section></a>
+                </div>
+
+                <div class="col-sm-4">
+                    <a href="/doctormanageslots"> <section class="mx-auto my-5" style="max-width: 23rem;">
+                            <div class="card testimonial-card mt-2 mb-3">
+                                <img src="images/manageslots.png" width="width" style="height:390px" alt="alt"/>
+
+                                <div class="card-body text-center">
+                                    <h4 class="card-title font-weight-bold">Manage Slots</h4>
+                                    <hr>
+                                </div>
+                            </div>
+                        </section> </a>
+                </div>
+
+
+                <div class="col-sm-4">
+                    <a href="/adddoctorphotos">   <section class="mx-auto my-5" style="max-width: 23rem;">
+                            <div class="card testimonial-card mt-2 mb-3">
+                                <img src="images/addphoto.png" width="width" height="height" alt="alt"/>
+                                <div class="card-body text-center">
+                                    <h4 class="card-title font-weight-bold">Add Photos</h4> 
+                                    <hr>
+
+                                </div>
+                            </div>
+                        </section></a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div th:replace="Footer:: footer"></div>
+
+        <script  src="js/jquery-3.6.0.min.js"></script><!-- JQUERY.MIN JS -->
+        <script  src="js/popper.min.js"></script><!-- POPPER.MIN JS -->
+        <script  src="js/bootstrap.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+
+        <script  src="js/jquery.bootstrap-touchspin.js"></script><!-- FORM JS -->
+        <script  src="js/bootstrap-slider.min.js"></script><!-- BOOTSTRAP Slider --> 
+        <script  src="js/magnific-popup.min.js"></script><!-- MAGNIFIC-POPUP JS -->
+        <script  src="js/waypoints.min.js"></script><!-- WAYPOINTS JS -->
+        <script  src="js/counterup.min.js"></script><!-- COUNTERUP JS -->
+        <script  src="js/waypoints-sticky.min.js"></script><!-- STICKY HEADER -->
+        <script  src="js/isotope.pkgd.min.js"></script><!-- MASONRY  -->
+        <script  src="js/owl.carousel.min.js"></script><!-- OWL  SLIDER  -->
+        <script  src="js/slick.min.js"></script><!-- Slick SLIDER  -->
+        <script  src="js/theia-sticky-sidebar.js"></script><!-- STICKY SIDEBAR  -->
+        <script  src="js/jquery.scrollbar.min.js"></script><!-- MY ACCOUNT LEFT PANEL SCROLLER -->
+        <script  src="js/dropzone.js"></script><!--IMAGE UPLOAD-->  
+        <script  src="js/bootstrap4-toggle.min.js"></script><!-- BOOTSTRAP TOOGLE-->
+        <script  src="js/jquery.dataTables.min.js"></script><!--DATA TABLE-->
+        <script  src="js/dataTables.bootstrap4.min.js"></script><!-- DATA TABLE-->
+        <script  src="js/lc_lightbox.lite.js" ></script><!-- IMAGE POPUP -->
+        <script  src="js/datepicker.min.js"></script><!-- DATEPICKER -->
+        <script  src="js/fullcalendar.min.js"></script><!-- DATEPICKER -->
+        <script src="js/recaptcha-api.js"></script><!-- RECAPTCHA-->
+        <script  src="js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
+
+    </body>
+</html>
+

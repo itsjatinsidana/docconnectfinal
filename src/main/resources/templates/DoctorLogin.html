@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>DocConnect</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+        <meta name="robots" content="" />    
+        <meta name="description" content="" />
+
+        <!-- FAVICONS ICON -->
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+
+        <!-- PAGE TITLE HERE -->
+        <title>DocConnect</title>
+
+        <!-- MOBILE SPECIFIC -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+
+        <!-- BOOTSTRAP STYLE SHEET -->
+        <link  href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- FONTAWESOME STYLE SHEET -->
+        <link  href="css/font-awesome.min.css" rel="stylesheet">
+        <!-- Feather STYLE SHEET -->
+        <link href="css/feather.css" rel="stylesheet">
+
+        <!-- Font STYLE SHEET -->
+        <link href="css/font.css" rel="stylesheet">    
+        <!-- OWL CAROUSEL STYLE SHEET -->
+        <link href="css/owl.carousel.min.css" rel="stylesheet">
+        <!-- SLICK CAROUSEL STYLE SHEET -->
+        <link href="css/slick.min.css" rel="stylesheet">
+        <!-- SLICK STYLE SHEET -->
+        <link href="css/slick-theme.css" rel="stylesheet">
+        <!-- Custome scrollbar STYLE SHEET  -->
+        <link href="css/jquery.scrollbar.css" rel="stylesheet">  
+        <!-- DropZone STYLE SHEET  --> 
+        <link href="css/dropzone.css" rel="stylesheet">       
+        <!-- MAGNIFIC POPUP STYLE SHEET -->
+        <link href="css/magnific-popup.min.css" rel="stylesheet">
+        <!-- FLATICON STYLE SHEET -->
+        <link href="css/flaticon.min.css" rel="stylesheet">
+        <!-- Lc light box popup -->
+        <link href="css/lc_lightbox.css" rel="stylesheet">     
+        <!-- Price Range Slider -->
+        <link href="css/bootstrap-slider.min.css" rel="stylesheet">
+        <!-- Bootstrap-toggle -->
+        <link href="css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <!-- Bootstrap-datatables -->
+        <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <!-- Date-picker -->
+        <link href="css/date-picker.css" rel="stylesheet">
+        <!-- Full calendar -->
+        <link href="css/fullcalendar.min.css" rel="stylesheet">   
+        <!-- MAIN STYLE SHEET -->
+        <link href="css/style.css" rel="stylesheet"> 
+
+        <!-- SWEETALERT LIBRARY -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
+            function checkLoginDoctor() {
+
+                var email = document.getElementById("t1").value;
+                var password = document.getElementById("t2").value;
+
+                if (email == "" || password == "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Enter The Form Properly !'
+                    });
+                } else if (email.indexOf("@") == -1)
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Enter Email in Proper Format !'
+                    });
+                } else {
+
+                    var url = "/CheckLoginDoctor?email=" + email + "&password=" + password;
+
+                    fetch(url, {method: "POST"})
+                            .then(response => response.text())
+                            .then(ans => renderAsHtml(ans));
+                }
+
+                function renderAsHtml(ans)
+                {
+
+
+                    if (ans === "success")
+                    {
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'login Successful',
+                            text: 'You have successfully Logged up!',
+                            showConfirmButton: true,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "/doctordashboard";
+                            }
+                        });
+
+                    } else if (ans === "fail")
+                    {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'login Failed',
+                            text: 'Invalid UserName/Password!',
+                        });
+
+                    } else if (ans === "exception")
+                    {
+                        alert(ans);
+                    }
+                }
+            }
+
+
+
+        </script>
+
+
+    </head>
+    <body>
+        <!-- LOADING AREA START ===== -->
+        <div class="loading-area">
+            <div class="loading-box"></div>
+            <div class="loading-pic">
+                <div class="cssload-wrap">
+                    <div class="cssload-container">
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- LOADING AREA  END ====== -->
+        <!--        <div th:replace="Navbar:: header1"></div>-->
+        <!--        <div th:replace="DoctorNavbar:: doctorheader"></div>-->
+        <!--        <div class="page-wraper cus-account-wrap  ">
+                    <header class="site-header header-style-1 mobile-sider-drawer-menu header-full-width  ">
+                        <div class="sticky-header main-bar-wraper  navbar-expand-lg ">
+                            <div class="main-bar bg-dark-green">  
+        
+                                <div class="container clearfix"> 
+                                    Logo section start
+                                    <div class="logo-header">
+                                        <div class="logo-header-inner logo-header-one">
+                                            <a href="/">
+                                                <img class="logo-pic-one" src="images/logo-light.png" alt="">
+                                                <img class="logo-pic-two" src="images/logo-dark.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>  
+                                    Logo section End
+        
+                                     NAV Toggle Button 
+                                    <button id="mobile-side-drawer" data-target=".header-nav" data-toggle="collapse" type="button" class="navbar-toggler collapsed">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar icon-bar-first"></span>
+                                        <span class="icon-bar icon-bar-two"></span>
+                                        <span class="icon-bar icon-bar-three"></span>
+                                    </button> 
+        
+                                     MAIN Vav 
+                                    <div class="nav-animation header-nav navbar-collapse collapse d-flex justify-content-center">
+        
+                                        <ul class=" nav navbar-nav">
+        
+        
+                                            <li class="has-child current-menu-item"><a href="/">Home</a>
+        
+                                            </li>
+                                            <li class="has-child"><a href="/doctordashboard">Doctor Dashboard</a>
+        
+                                            </li>
+        
+                                            <li class="has-child"><a href="javascript:;">About us</a>
+        
+                                            </li>
+        
+                                            <li class="has-child"><a href="javascript:;">Blog</a>
+        
+                                            </li>
+        
+                                            <li class="has-child"><a href="javascript:;">Contact</a>
+        
+                                            </li> 
+                                            <li class="has-child"><a href="/"><span id="docemail" th:text="${session.email}"></span></a>
+        
+                                            </li>
+        
+                                        </ul>
+        
+                                    </div>
+        
+                                     Header Right Section
+                                    <div class="extra-nav header-2-nav">
+                                        <div class="extra-cell">
+        
+                                            Sign up
+        
+                                            Add Listing up
+                                            <a href="/doctorlogout" class="site-button aon-add-listing m-l20" id="logoutBtn" >
+                                                <i class="feather-plus-circle"></i> Logout
+                                            </a> </div>
+        
+                                    </div>                            
+        
+                                </div>    
+        
+                            </div>
+                        </div>
+                    </header>
+        
+                </div>-->
+
+        <div class="page-content">
+            <!--Banner-->
+            <div class="aon-page-benner-area">
+                <div class="aon-page-banner-row">
+                    <div class="aon-page-benner-overlay" ></div>
+                    <div class="sf-banner-heading-wrap">
+                        <div class="sf-banner-heading-area">
+                            <div class="sf-banner-heading-large">Doctor Login</div>
+                            <div class="sf-banner-breadcrumbs-nav">
+                                <ul class="list-inline">
+                                    <li><a href="/"> Home </a></li>
+                                    <li><a href="https://aonetheme.com/latest-service-finder/providers-category/packers-and-movers/">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
+
+
+
+
+
+
+            <!-- Contact Us-->
+            <div class="section-full p-t80 p-b90 sf-contact-form3-area">
+                <div class="container">
+
+                    <div class="sf-contact-form3-wrap">
+                        <div class="sf-con-form-title text-center">
+                            <h2 class="m-b30">Login From</h2>
+                        </div>
+                        <!--Contact Information-->  
+                        <div class="sf-contact-form3 shadow">
+                            <form class="contact-form" method="post">
+                                <div class="row">
+
+                                    <!-- COLUMNS 1 -->
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="email" name="fullname" placeholder="Email" class="form-control" id="t1" required>
+                                        </div>
+                                    </div>
+                                    <!-- COLUMNS 2 -->
+
+                                    <!-- COLUMNS 3 -->
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="password" name="phone" placeholder="Password" class="form-control"id="t2">
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+                                <div class="sf-contact-submit-btn text-center">
+                                    <button class="site-button" type="button" onclick="checkLoginDoctor()">Submit</button>
+                                </div>
+
+                                <div class="login-section">
+                                    <h3>Don't have an account? </h3>
+                                    <h4> Sign in here: <a style="text-decoration: underline;color: blue" href="/doctorsignup">signIn</a></h4>
+
+                                </div>
+                            </form>
+                        </div>
+                        <!--Contact Information End-->
+                    </div>  
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <!-- JAVASCRIPT  FILES ========================================= --> 
+        <script  src="js/jquery-3.6.0.min.js"></script><!-- JQUERY.MIN JS -->
+        <script  src="js/popper.min.js"></script><!-- POPPER.MIN JS -->
+        <script  src="js/bootstrap.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+
+        <script  src="js/jquery.bootstrap-touchspin.js"></script><!-- FORM JS -->
+        <script  src="js/bootstrap-slider.min.js"></script><!-- BOOTSTRAP Slider --> 
+        <script  src="js/magnific-popup.min.js"></script><!-- MAGNIFIC-POPUP JS -->
+        <script  src="js/waypoints.min.js"></script><!-- WAYPOINTS JS -->
+        <script  src="js/counterup.min.js"></script><!-- COUNTERUP JS -->
+        <script  src="js/waypoints-sticky.min.js"></script><!-- STICKY HEADER -->
+        <script  src="js/isotope.pkgd.min.js"></script><!-- MASONRY  -->
+        <script  src="js/owl.carousel.min.js"></script><!-- OWL  SLIDER  -->
+        <script  src="js/slick.min.js"></script><!-- Slick SLIDER  -->
+        <script  src="js/theia-sticky-sidebar.js"></script><!-- STICKY SIDEBAR  -->
+        <script  src="js/jquery.scrollbar.min.js"></script><!-- MY ACCOUNT LEFT PANEL SCROLLER -->
+        <script  src="js/dropzone.js"></script><!--IMAGE UPLOAD-->  
+        <script  src="js/bootstrap4-toggle.min.js"></script><!-- BOOTSTRAP TOOGLE-->
+        <script  src="js/jquery.dataTables.min.js"></script><!--DATA TABLE-->
+        <script  src="js/dataTables.bootstrap4.min.js"></script><!-- DATA TABLE-->
+        <script  src="js/lc_lightbox.lite.js" ></script><!-- IMAGE POPUP -->
+        <script  src="js/datepicker.min.js"></script><!-- DATEPICKER -->
+        <script  src="js/fullcalendar.min.js"></script><!-- DATEPICKER -->
+        <script src="js/recaptcha-api.js"></script><!-- RECAPTCHA-->
+        <script  src="js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
+
+    </body>
+</html>
+

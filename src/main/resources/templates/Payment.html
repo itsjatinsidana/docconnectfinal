@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+
+    <!-- Mirrored from aonetheme.com/mfine/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Apr 2024 18:17:18 GMT -->
+    <head>
+
+        <!-- META -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+        <meta name="robots" content="" />    
+        <meta name="description" content="" />
+
+        <!-- FAVICONS ICON -->
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+
+        <!-- PAGE TITLE HERE -->
+        <title>DocConnect</title>
+
+        <!-- MOBILE SPECIFIC -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+
+        <!-- BOOTSTRAP STYLE SHEET -->
+        <link  href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- FONTAWESOME STYLE SHEET -->
+        <link  href="css/font-awesome.min.css" rel="stylesheet">
+        <!-- Feather STYLE SHEET -->
+        <link href="css/feather.css" rel="stylesheet">
+
+        <!-- Font STYLE SHEET -->
+        <link href="css/font.css" rel="stylesheet">    
+        <!-- OWL CAROUSEL STYLE SHEET -->
+        <link href="css/owl.carousel.min.css" rel="stylesheet">
+        <!-- SLICK CAROUSEL STYLE SHEET -->
+        <link href="css/slick.min.css" rel="stylesheet">
+        <!-- SLICK STYLE SHEET -->
+        <link href="css/slick-theme.css" rel="stylesheet">
+        <!-- Custome scrollbar STYLE SHEET  -->
+        <link href="css/jquery.scrollbar.css" rel="stylesheet">  
+        <!-- DropZone STYLE SHEET  --> 
+        <link href="css/dropzone.css" rel="stylesheet">       
+        <!-- MAGNIFIC POPUP STYLE SHEET -->
+        <link href="css/magnific-popup.min.css" rel="stylesheet">
+        <!-- FLATICON STYLE SHEET -->
+        <link href="css/flaticon.min.css" rel="stylesheet">
+        <!-- Lc light box popup -->
+        <link href="css/lc_lightbox.css" rel="stylesheet">     
+        <!-- Price Range Slider -->
+        <link href="css/bootstrap-slider.min.css" rel="stylesheet">
+        <!-- Bootstrap-toggle -->
+        <link href="css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <!-- Bootstrap-datatables -->
+        <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <!-- Date-picker -->
+        <link href="css/date-picker.css" rel="stylesheet">
+        <!-- Full calendar -->
+        <link href="css/fullcalendar.min.css" rel="stylesheet">   
+        <!-- MAIN STYLE SHEET -->
+        <link href="css/style.css" rel="stylesheet">   
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="js/Razorpay.js" type="text/javascript"></script>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+
+
+        <!-- SWEETALERT LIBRARY -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
+            var total;
+            function cashpay() {
+                var email = document.getElementById("d3").innerText;
+                var slots = document.getElementById("d4").innerText;
+                var date = document.getElementById("d5").innerText;
+                total = document.getElementById("d6").innerText;
+
+                var url = "./paymentReq?date=" + date + "&v_email=" + email + "&amount=" + total + "&slots=" + slots + "&type=cash&status=pending";
+                fetch(url)
+                        .then(response => response.text())
+                        .then(ans => renderAsHtml(ans));
+
+            }
+            function renderAsHtml(ans) {
+             
+                console.log(ans);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Cash Booking Confirmed',
+                    text: 'You have successfully Booked the slot',
+                    showConfirmButton: true,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/";
+                    }
+                });
+
+            }
+
+            function onlinepay() {
+                var email = document.getElementById("d3").innerText;
+                var slots = document.getElementById("d4").innerText;
+                var date = document.getElementById("d5").innerText;
+                var total = document.getElementById("d6").innerText;
+
+                var url = "./paymentReq?date=" + date + "&v_email=" + email + "&amount=" + total + "&slots=" + slots + "&type=online&status=pending";
+                fetch(url)
+                        .then(response => response.text())
+                        .then(ans => renderAsHtml2(ans));
+
+            }
+            function renderAsHtml2(ans) {
+
+                console.log(ans);
+                window.location.href = "/paymentdoneicon";
+            }
+
+
+            function paymentlogic()
+            {
+                total = document.getElementById("d6").innerText;
+                var options = {
+                    "key": "rzp_test_96HeaVmgRvbrfT",
+                    "amount": total + "00",
+                    "name": "DOc Connect",
+                    "description": "",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOmghn1er2yRA0yXfMRmroSSpWEdAGNV5KHg&usqp=CAU",
+                    "handler": function (response) {
+
+                        if (response.razorpay_payment_id == "" || response.razorpay_payment_id == undefined) {
+
+                            window.location.href = "payment_action?status=failed";
+                            // paymentfail(authormobile,"Payment failed!");
+
+                            alert("Payment Failed")
+
+                        } else {
+//success
+                            onlinepay();
+
+                            //payment success
+                            //call your book payment function here
+                        }
+                    },
+                    "prefill": {
+                        "name": "",
+                        "email": ""
+                    },
+                    "notes": {
+                        "address": ""
+                    },
+                    "theme": {
+                        "color": "#F37254"
+                    },
+                    "modal": {
+                        "ondismiss": function () {
+                            $("#statusmodal").modal("show");
+                            document.getElementById("status").innerHTML = "Payment failed ! Try again";
+                        }
+                    }
+                };
+
+
+
+                var rzp1 = new Razorpay(options);
+                rzp1.on('payment.failed', function (response) {
+                    console.log("a2");
+                    console.log(response.error.code);
+
+                    alert("Payment Failed");
+
+
+                    // paymentfail(authormobile,"Payment failed!");
+                    // rzp1.close();
+                    // alert(response.error.code);
+                    // alert(response.error.description);
+                    // alert(response.error.source);
+                    // alert(response.error.step);
+                    // alert(response.error.reason);
+                    // alert(response.error.metadata.order_id);
+                    // alert(response.error.metadata.payment_id);
+
+                });
+                rzp1.open();
+            }
+
+        </script>
+
+
+
+    </head>
+
+    <body >
+
+
+        <!-- LOADING AREA START ===== -->
+        <div class="loading-area">
+            <div class="loading-box"></div>
+            <div class="loading-pic">
+                <div class="cssload-wrap">
+                    <div class="cssload-container">
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- LOADING AREA  END ====== -->
+
+        <div class="page-wraper">
+            <!--            <h1>  <span id="duser" th:text="${useremail}"></span> </h1>-->
+
+          <div th:replace="UserNavbar1:: userheader1"></div>
+            <br/>
+            <br/><br/><br/>
+
+            <section class="aon-med-appoint-area">
+
+
+                <div class="container">
+
+                    <!--Title Section Start-->
+
+                    <div class="section-head center white" >
+
+                        <h2 class="aon-title" style="font-size: 24px; margin-bottom: 10px;">Make Payment     <span id="d3" th:text="${email}"></span></h2>
+
+                        <h4 class="aon-title" style="font-size: 18px; margin-bottom: 5px;">of slot at Time: <span id="d4" th:text="${slots}"></span></h4>
+
+                        <h4 class="aon-title" style="font-size: 18px; margin-bottom: 5px;">on <span id="d5" th:text="${date}"></span></h4>
+
+                        <h4 class="aon-title" style="font-size: 18px; margin-bottom: 5px;">is Rs <span id="d6" th:text="${total}"></span></h4>
+
+                    </div>
+
+                    <!--Title Section End-->
+                    <div class="section-content">
+
+                        <div class="media animate-v">
+                            <img src="images/heart.png" alt="">
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+        <div class="container" style="margin-top: 20px">
+            <div class="row">
+                <div class="aon-admin-heading-right col-sm-6">
+                    <button onclick="cashpay()" type="button" class="admin-button add-team-btn col-sm-12" style="padding: 25px"><i class="fa fa-plus "> &nbsp;</i>Cash Payment </button>
+                </div>
+
+                <div class="aon-admin-heading-right col-sm-6">
+                    <button onclick="paymentlogic()"  type="button" class="admin-button add-team-btn col-sm-12" style="padding: 25px"><i class="fa fa-plus "> &nbsp;</i> Online Payment</button>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>   <br/>   <br/>   <br/>   <br/>   <br/>
+        <div th:replace="Footer:: footer"></div>
+
+        <button class="scroltop"><span class="fa fa-angle-up  relative" id="btn-vibrate"></span></button>
+
+
+
+
+
+        <!-- JAVASCRIPT  FILES ========================================= --> 
+        <script  src="js/jquery-3.6.0.min.js"></script><!-- JQUERY.MIN JS -->
+        <script  src="js/popper.min.js"></script><!-- POPPER.MIN JS -->
+        <script  src="js/bootstrap.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+
+        <script  src="js/jquery.bootstrap-touchspin.js"></script><!-- FORM JS -->
+        <script  src="js/bootstrap-slider.min.js"></script><!-- BOOTSTRAP Slider --> 
+        <script  src="js/magnific-popup.min.js"></script><!-- MAGNIFIC-POPUP JS -->
+        <script  src="js/waypoints.min.js"></script><!-- WAYPOINTS JS -->
+        <script  src="js/counterup.min.js"></script><!-- COUNTERUP JS -->
+        <script  src="js/waypoints-sticky.min.js"></script><!-- STICKY HEADER -->
+        <script  src="js/isotope.pkgd.min.js"></script><!-- MASONRY  -->
+        <script  src="js/owl.carousel.min.js"></script><!-- OWL  SLIDER  -->
+        <script  src="js/slick.min.js"></script><!-- Slick SLIDER  -->
+        <script  src="js/theia-sticky-sidebar.js"></script><!-- STICKY SIDEBAR  -->
+        <script  src="js/jquery.scrollbar.min.js"></script><!-- MY ACCOUNT LEFT PANEL SCROLLER -->
+        <script  src="js/dropzone.js"></script><!--IMAGE UPLOAD-->  
+        <script  src="js/bootstrap4-toggle.min.js"></script><!-- BOOTSTRAP TOOGLE-->
+        <script  src="js/jquery.dataTables.min.js"></script><!--DATA TABLE-->
+        <script  src="js/dataTables.bootstrap4.min.js"></script><!-- DATA TABLE-->
+        <script  src="js/lc_lightbox.lite.js" ></script><!-- IMAGE POPUP -->
+        <script  src="js/datepicker.min.js"></script><!-- DATEPICKER -->
+        <script  src="js/fullcalendar.min.js"></script><!-- DATEPICKER -->
+        <script src="js/recaptcha-api.js"></script><!-- RECAPTCHA-->
+        <script  src="js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
+
+
+
+
+    </body>
+
+
+    <!-- Mirrored from aonetheme.com/mfine/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Apr 2024 18:17:43 GMT -->
+</html>
+
+
+
+

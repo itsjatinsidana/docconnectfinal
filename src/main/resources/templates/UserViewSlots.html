@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+
+    <!-- Mirrored from aonetheme.com/mfine/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Apr 2024 18:17:18 GMT -->
+    <head>
+
+        <!-- META -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+        <meta name="robots" content="" />    
+        <meta name="description" content="" />
+
+        <!-- FAVICONS ICON -->
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+
+        <!-- PAGE TITLE HERE -->
+        <title>DocConnect</title>
+
+        <!-- MOBILE SPECIFIC -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+
+        <!-- BOOTSTRAP STYLE SHEET -->
+        <link  href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- FONTAWESOME STYLE SHEET -->
+        <link  href="css/font-awesome.min.css" rel="stylesheet">
+        <!-- Feather STYLE SHEET -->
+        <link href="css/feather.css" rel="stylesheet">
+
+        <!-- Font STYLE SHEET -->
+        <link href="css/font.css" rel="stylesheet">    
+        <!-- OWL CAROUSEL STYLE SHEET -->
+        <link href="css/owl.carousel.min.css" rel="stylesheet">
+        <!-- SLICK CAROUSEL STYLE SHEET -->
+        <link href="css/slick.min.css" rel="stylesheet">
+        <!-- SLICK STYLE SHEET -->
+        <link href="css/slick-theme.css" rel="stylesheet">
+        <!-- Custome scrollbar STYLE SHEET  -->
+        <link href="css/jquery.scrollbar.css" rel="stylesheet">  
+        <!-- DropZone STYLE SHEET  --> 
+        <link href="css/dropzone.css" rel="stylesheet">       
+        <!-- MAGNIFIC POPUP STYLE SHEET -->
+        <link href="css/magnific-popup.min.css" rel="stylesheet">
+        <!-- FLATICON STYLE SHEET -->
+        <link href="css/flaticon.min.css" rel="stylesheet">
+        <!-- Lc light box popup -->
+        <link href="css/lc_lightbox.css" rel="stylesheet">     
+        <!-- Price Range Slider -->
+        <link href="css/bootstrap-slider.min.css" rel="stylesheet">
+        <!-- Bootstrap-toggle -->
+        <link href="css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <!-- Bootstrap-datatables -->
+        <link href="css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <!-- Date-picker -->
+        <link href="css/date-picker.css" rel="stylesheet">
+        <!-- Full calendar -->
+        <link href="css/fullcalendar.min.css" rel="stylesheet">   
+        <!-- MAIN STYLE SHEET -->
+        <link href="css/style.css" rel="stylesheet">   
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="js/Razorpay.js" type="text/javascript"></script>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+
+        <script>
+
+            function userViewSlot() {
+                // ajax fetch api code 
+
+
+                var url = "/getuserview";
+                fetch(url, {method: "GET"})
+                        .then(response => response.text())
+                        .then(ans => renderAsHtml1(ans));
+            }
+
+            function renderAsHtml1(ans)
+            {
+                //parsing of json
+                var mainobj = JSON.parse(ans);
+                var arr = mainobj["ans"];
+                console.log(arr);
+                var s = "";
+                s += "<div class= \"table-responsive\" >"
+                s += "<table class=\"table table-hover table-bordered\" >";
+                // we can fetch data in json array using for loop
+                s += "<thead>";
+                s += "<tr>";
+                s += "<th>Booking Id</th>";
+                s += "<th>Booking Date</th>";
+                s += "<th>Doctor Email</th>";
+                s += "<th>Payment Type</th>";
+                s += "<th>Total Price</th>";
+                s += "<th>Status</th>";
+
+
+                s += "</tr>";
+                s += "</thead>";
+                s += "<tbody>";
+                for (var i = 0; i < arr.length; i++)
+                {
+
+                    var dt = arr[i];
+                    s = s + "<tr>";
+                    s = s + "<td>" + dt.booking_id + "</td>";
+                    s = s + "<td>" + dt.date + "</td>";
+                    s = s + "<td>" + dt.vendor_email + "</td>";
+
+                    s = s + "<td>" + dt.payment_type + "</td>";
+                    s = s + "<td>" + dt.total_price + "</td>";
+                    s = s + "<td>" + dt.status + "</td>";
+
+
+
+
+
+                    s = s + "</tr>";
+                }
+
+                s = s + "</table>";
+                s = s + "</div>";
+                document.getElementById("d1").innerHTML = s;
+            }
+
+        </script>
+
+
+
+    </head>
+
+    <body onload="userViewSlot()">
+
+
+        <!-- LOADING AREA START ===== -->
+        <div class="loading-area">
+            <div class="loading-box"></div>
+            <div class="loading-pic">
+                <div class="cssload-wrap">
+                    <div class="cssload-container">
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                        <span class="cssload-dots"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- LOADING AREA  END ====== -->
+
+        <div class="page-wraper">
+
+
+<!--            <div th:replace="Navbar:: header1"></div>-->
+
+ <div th:replace="UserNavbar1:: userheader1"></div>
+            <br/>
+            <br/><br/><br/>
+
+            <section class="aon-med-appoint-area">
+
+
+                <div class="container">
+
+                    <!--Title Section Start-->
+
+                    <div class="section-head center white" >
+
+
+                        <div class="sf-contact-form3-wrap">
+                            <div class="sf-con-form-title text-center text-light">
+                                <h2 class="m-b30 text-light">View Slots</h2>
+                            </div>
+                        </div>
+
+                        <!--Title Section End-->
+                        <div class="section-content">
+
+                            <div class="media animate-v">
+                                <img src="images/heart.png" alt="">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+            </section>
+
+
+        </div>
+
+        <div class="container" style="margin-top: 50px">
+            <div id="d1"></div>
+        </div>
+
+        <br/>
+        <br/>   <br/>   <br/>   <br/>   <br/>   <br/>
+        <div th:replace="Footer:: footer"></div>
+
+        <button class="scroltop"><span class="fa fa-angle-up  relative" id="btn-vibrate"></span></button>
+
+
+
+
+
+        <!-- JAVASCRIPT  FILES ========================================= --> 
+        <script  src="js/jquery-3.6.0.min.js"></script><!-- JQUERY.MIN JS -->
+        <script  src="js/popper.min.js"></script><!-- POPPER.MIN JS -->
+        <script  src="js/bootstrap.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+
+        <script  src="js/jquery.bootstrap-touchspin.js"></script><!-- FORM JS -->
+        <script  src="js/bootstrap-slider.min.js"></script><!-- BOOTSTRAP Slider --> 
+        <script  src="js/magnific-popup.min.js"></script><!-- MAGNIFIC-POPUP JS -->
+        <script  src="js/waypoints.min.js"></script><!-- WAYPOINTS JS -->
+        <script  src="js/counterup.min.js"></script><!-- COUNTERUP JS -->
+        <script  src="js/waypoints-sticky.min.js"></script><!-- STICKY HEADER -->
+        <script  src="js/isotope.pkgd.min.js"></script><!-- MASONRY  -->
+        <script  src="js/owl.carousel.min.js"></script><!-- OWL  SLIDER  -->
+        <script  src="js/slick.min.js"></script><!-- Slick SLIDER  -->
+        <script  src="js/theia-sticky-sidebar.js"></script><!-- STICKY SIDEBAR  -->
+        <script  src="js/jquery.scrollbar.min.js"></script><!-- MY ACCOUNT LEFT PANEL SCROLLER -->
+        <script  src="js/dropzone.js"></script><!--IMAGE UPLOAD-->  
+        <script  src="js/bootstrap4-toggle.min.js"></script><!-- BOOTSTRAP TOOGLE-->
+        <script  src="js/jquery.dataTables.min.js"></script><!--DATA TABLE-->
+        <script  src="js/dataTables.bootstrap4.min.js"></script><!-- DATA TABLE-->
+        <script  src="js/lc_lightbox.lite.js" ></script><!-- IMAGE POPUP -->
+        <script  src="js/datepicker.min.js"></script><!-- DATEPICKER -->
+        <script  src="js/fullcalendar.min.js"></script><!-- DATEPICKER -->
+        <script src="js/recaptcha-api.js"></script><!-- RECAPTCHA-->
+        <script  src="js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
+
+
+
+
+    </body>
+
+
+    <!-- Mirrored from aonetheme.com/mfine/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Apr 2024 18:17:43 GMT -->
+</html>
+
+
+
+
