@@ -7,7 +7,8 @@ public class DBLoader {
     public static ResultSet executeSQL(String sql) throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
         System.out.println("Driver Loading Done");                      //change schema name here
-        Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/docconnect", "root", "system");
+      //  Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/docconnect", "root", "system");
+         Connection conn = DriverManager.getConnection("jdbc:mysql://roundhouse.proxy.rlwy.net:28624/railway", "root", "XMNwHvbazBGtvoUILOgVwALZpTmAnLib");
         System.out.println("connection done");
         Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         System.out.println("Statement Done");
